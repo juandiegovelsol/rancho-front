@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { selectHome, openMenu, closeMenu } from "./homeSlice";
+import { NavBar } from "../../components/NavBar";
 import "./home.scss";
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
 
   return (
     <main className="home">
+      <NavBar />
       {menuHandler && <p>Menu is open</p>}
       <p>Home page</p>
       <button onClick={handleClick}>Click</button>

@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+.nav-bar {
+  height: 6%;
+  width: 100%;
+  @include flexbox(flex, row, space-between, center);
+  background-color: $secondColor;
+  &__title {
+    margin: 0;
+  }
+  &__menu-button {
+    &:hover,
+    &:focus {
+      cursor: pointer;
+    }
+  }
+}
