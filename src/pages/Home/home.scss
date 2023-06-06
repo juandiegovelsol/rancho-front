@@ -1,5 +1,8 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
 .home {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flexbox(flex, column, flex-start, center);
+  background-color: $backgroundColor;
+  height: 100%;
+  width: 100%;
 }
