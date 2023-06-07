@@ -1,34 +1,26 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectHome, openMenu, closeMenu, setHomeButton } from "./homeSlice";
+import { selectHome, closeMenu, setEventButton } from "../Home/homeSlice";
 import { NavBar } from "../../components/NavBar";
 import { Menu } from "../../components/Menu";
-import "./home.scss";
+import "./event-page.scss";
 
-const Home = () => {
+const EventPage = () => {
   const dispatch = useDispatch();
   const { menuHandler } = useSelector(selectHome);
-  const handleClick = () => {
-    if (menuHandler) {
-      dispatch(closeMenu());
-    } else {
-      dispatch(openMenu());
-    }
-  };
 
   useEffect(() => {
-    dispatch(setHomeButton());
+    dispatch(setEventButton());
     dispatch(closeMenu());
   }, []);
 
   return (
-    <main className="home">
+    <main className="event-page">
       <NavBar />
       {menuHandler && <Menu />}
-      <p>Home page</p>
-      <button onClick={handleClick}>Click</button>
+      <p>Event Page</p>
     </main>
   );
 };
 
-export default Home;
+export default EventPage;
