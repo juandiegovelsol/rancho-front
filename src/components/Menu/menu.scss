@@ -3,6 +3,6 @@
 
 .menu {
   @include flexbox(flex, column, flex-start, center);
-  min-height: 30%;
+  min-height: 30vh;
   width: 100%;
 }

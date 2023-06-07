@@ -1,18 +1,39 @@
 @import "../../styles/variables.scss";
 @import "../../styles//mixins.scss";
 .nav-bar {
+  position: fixed;
+  top: 0;
   height: 6%;
   width: 100%;
-  padding: 0px 5%;
-  @include flexbox(flex, row, space-between, center);
-  background-color: $mainColor;
+  @include flexbox(flex, column, flex-start, center);
+  &__header {
+    padding: 0px 4% 0px 5%;
+    @include flexbox(flex, row, space-between, center);
+    background-color: $mainColor;
+  }
+
   &__title {
     margin: 0;
+    color: $textColor;
   }
   &__menu-button {
+    @include flexbox(flex, row, center, center);
+    max-height: 90%;
+    max-width: 15%;
+    border: none;
+    background-color: transparent;
     &:hover,
     &:focus {
       cursor: pointer;
     }
+    img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+      @include filterGrey();
+    }
+  }
+  &__menu {
+    width: 100%;
   }
 }
