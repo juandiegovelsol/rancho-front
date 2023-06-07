@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectHome, openMenu, closeMenu } from "./homeSlice";
+import { selectHome, openMenu, closeMenu, setHomeButton } from "./homeSlice";
 import { NavBar } from "../../components/NavBar";
+import { Menu } from "../../components/Menu";
 import "./home.scss";
 
 const Home = () => {
@@ -14,10 +16,14 @@ const Home = () => {
     }
   };
 
+  useEffect(() => {
+    dispatch(setHomeButton());
+  }, []);
+
   return (
     <main className="home">
       <NavBar />
-      {menuHandler && <p>Menu is open</p>}
+      {menuHandler && <Menu />}
       <p>Home page</p>
       <button onClick={handleClick}>Click</button>
     </main>

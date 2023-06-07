@@ -12,12 +12,12 @@ const NavBar = () => {
   };
 
   return (
-    <header className="nav-bar">
+    <section className="nav-bar">
       <h1 className="nav-bar__title">El Rancho</h1>
       <button onClick={handleMenu} className="nav-bar__menu-button">
         Menu
       </button>
-    </header>
+    </section>
   );
 };
 
