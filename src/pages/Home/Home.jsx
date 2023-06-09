@@ -9,6 +9,7 @@ import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
 import { ShadedInfo } from "../../components/ShadedInfo";
 import { HomeResume } from "../../components/HomeResume";
 import { RedirectButton } from "../../components/RedirectButton";
+import { Maps } from "../../components/Maps";
 
 import mainVideo from "../../assets/videos/main.mp4";
 import home_resume1 from "../../assets/images/home-resume1.jpg";
@@ -72,6 +73,7 @@ const Home = () => {
             redirect={redirect}
           />
         </HomeResume>
+        <Maps centerlat={2.3512495} centerlng={-76.6894962} />
         <p>Home page</p>
         <button>Click</button>
       </section>
