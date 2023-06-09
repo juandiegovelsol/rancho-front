@@ -8,12 +8,15 @@
   left: 0;
   height: 17%;
   width: 100%;
-
   @include flexbox(flex, column, center, center);
   &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 66%;
     width: 90%;
-    padding: 4% 2%;
+    padding: 0% 2%;
     background-color: $backgroundColorTransparent;
     text-align: center;
     font-size: 23px;
