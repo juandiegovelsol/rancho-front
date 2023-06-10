@@ -6,6 +6,10 @@ import nature2 from "../images/naturaleza2.jpg";
 import romantic from "../images/cena-romantica.jpg";
 import start_dish1 from "../images/entrada-chicharron.jpg";
 
+import facebook from "../icons/facebook.svg";
+import instagram from "../icons/instagram.svg";
+import whatsapp from "../icons/whatsapp.svg";
+
 export const homeGalery = [
   {
     title: "Matrimonios",
@@ -41,5 +45,20 @@ export const homeGalery = [
     title: "Baby Shower",
     text: "Organizamos todo tipo de eventos, para ti!",
     image: event3,
+  },
+];
+
+export const socialMedia = [
+  {
+    logo: facebook,
+    link: "https://www.facebook.com/profile.php?id=100063829231733",
+  },
+  {
+    logo: instagram,
+    link: "https://www.instagram.com/ranchotimbio/",
+  },
+  {
+    logo: whatsapp,
+    link: "hhttps://wa.link/u5hhng",
   },
 ];

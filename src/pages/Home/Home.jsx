@@ -12,12 +12,15 @@ import { RedirectButton } from "../../components/RedirectButton";
 import { Maps } from "../../components/Maps";
 import { MapsWrapper } from "../../components/MapsWrapper";
 import { Carrousel } from "../../components/Carrousel";
+import { CustomFooter } from "../../components/CustomFooter";
 
 import mainVideo from "../../assets/videos/main.mp4";
 import home_resume1 from "../../assets/images/home-resume1.jpg";
 import home_resume2 from "../../assets/images/home-resume2.jpg";
 import home_resume3 from "../../assets/images/home-resume3.jpg";
-import { homeGalery } from "../../assets/data/homeGalery";
+import footer from "../../assets/images/footer.jpg";
+import logo from "../../assets/images/logo.png";
+import { homeGalery, socialMedia } from "../../assets/data/homeGalery";
 
 import "./home.scss";
 
@@ -48,6 +51,7 @@ const Home = () => {
           />
           <ShadedBottomInfo text="3 RAZONES PARA VISITAR EL RANCHO" />
         </FullVideo>
+
         <HomeResume
           direction="normal"
           image={home_resume1}
@@ -59,6 +63,7 @@ const Home = () => {
             redirect={redirect}
           />
         </HomeResume>
+
         <HomeResume
           direction="inverted"
           image={home_resume2}
@@ -66,6 +71,7 @@ const Home = () => {
         >
           <RedirectButton text="VER CARTA" link="/menu" redirect={redirect} />
         </HomeResume>
+
         <HomeResume
           direction="normal"
           image={home_resume3}
@@ -77,13 +83,18 @@ const Home = () => {
             redirect={redirect}
           />
         </HomeResume>
+
         <MapsWrapper city="TIMBIO" district="El arado" adress="Cra xx # xx">
           <Maps centerlat={2.3512495} centerlng={-76.6894962} />
         </MapsWrapper>
+
         <Carrousel carrousel_photos={homeGalery} title="GALERIA" />
 
-        <p>Home page</p>
-        <button>Click</button>
+        <CustomFooter
+          logo={logo}
+          background={footer}
+          socialMedia={socialMedia}
+        />
       </section>
     </main>
   );
