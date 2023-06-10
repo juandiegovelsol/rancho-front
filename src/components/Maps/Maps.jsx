@@ -1,4 +1,4 @@
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useMemo } from "react";
 import PropTypes from "prop-types";
 
@@ -17,8 +17,13 @@ const Maps = ({ centerlat, centerlng }) => {
         <GoogleMap
           mapContainerClassName="map-container"
           center={center}
-          zoom={15.5}
-        />
+          zoom={15}
+        >
+          <Marker
+            position={{ lat: 2.3444659, lng: -76.686588 }}
+            visible={true}
+          />
+        </GoogleMap>
       )}
     </div>
   );

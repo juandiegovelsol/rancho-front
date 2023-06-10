@@ -10,11 +10,15 @@ import { ShadedInfo } from "../../components/ShadedInfo";
 import { HomeResume } from "../../components/HomeResume";
 import { RedirectButton } from "../../components/RedirectButton";
 import { Maps } from "../../components/Maps";
+import { MapsWrapper } from "../../components/MapsWrapper";
+import { Carrousel } from "../../components/Carrousel";
 
 import mainVideo from "../../assets/videos/main.mp4";
 import home_resume1 from "../../assets/images/home-resume1.jpg";
 import home_resume2 from "../../assets/images/home-resume2.jpg";
 import home_resume3 from "../../assets/images/home-resume3.jpg";
+import { homeGalery } from "../../assets/data/homeGalery";
+
 import "./home.scss";
 
 const Home = () => {
@@ -73,7 +77,11 @@ const Home = () => {
             redirect={redirect}
           />
         </HomeResume>
-        <Maps centerlat={2.3512495} centerlng={-76.6894962} />
+        <MapsWrapper city="TIMBIO" district="El arado" adress="Cra xx # xx">
+          <Maps centerlat={2.3512495} centerlng={-76.6894962} />
+        </MapsWrapper>
+        <Carrousel carrousel_photos={homeGalery} title="GALERIA" />
+
         <p>Home page</p>
         <button>Click</button>
       </section>

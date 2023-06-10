@@ -1,0 +1,67 @@
+/* .carrousel {
+  @include flexbox(flex, column, flex-start, center);
+  max-height: 40vh;
+  max-width: 100vw;
+  background-color: $backgroundColor;
+  &__title {
+    font-size: 30px;
+    font-size: 500;
+    color: $textColor;
+  }
+} */
+
+/* .carrousel-galery {
+  max-height: 40vh;
+  max-width: 100%;
+}
+.carrousel-item {
+  max-height: 40vh;
+  max-width: 100%;
+}
+.carrousel-inner {
+  max-height: 40vh;
+  max-width: 100%;
+} */
+.carrousel {
+  height: 57vh;
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.carrousel__title {
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+}
+.carousel .slide .carousel-dark {
+  height: 50vh;
+  max-height: 100vh;
+  max-width: 100vw;
+  min-height: 50vh;
+  min-width: 100vw;
+}
+.carousel-inner {
+  max-height: 100vh;
+  max-width: 100vw;
+  min-height: 50vh;
+  min-width: 100vw;
+}
+.d-block .w-100 {
+  height: auto;
+  max-height: 400px;
+  max-width: 100vw;
+}
+.carousel-caption {
+  position: absolute;
+  top: 39vh;
+}
+.carousel-indicators {
+  position: absolute;
+  top: 36vh;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  height: 40vh;
+  color: #f5f5dc;
+}
