@@ -27,16 +27,16 @@ const CustomFooter = ({ logo, background, socialMedia }) => {
             ))}
         </div>
       </span>
-      <span className="custom-footer__developer">
-        Developed by:{" "}
-        <a
-          href={"https://github.com/juandiegovelsol"}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          @juandiegovelsol
-        </a>
-      </span>
+      <a
+        href={
+          "https://www.linkedin.com/in/juan-diego-velasco-solano-713148122/"
+        }
+        target="_blank"
+        rel="noopener noreferrer"
+        className="custom-footer__developer"
+      >
+        <p>Developed by: @juandiegovelsol</p>
+      </a>
     </footer>
   );
 };

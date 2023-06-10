@@ -84,7 +84,11 @@ const Home = () => {
           />
         </HomeResume>
 
-        <MapsWrapper city="TIMBIO" district="El arado" adress="Cra xx # xx">
+        <MapsWrapper
+          city="TIMBIO"
+          district="El arado"
+          adress="Calle 12 # 22-132"
+        >
           <Maps centerlat={2.3512495} centerlng={-76.6894962} />
         </MapsWrapper>
 
