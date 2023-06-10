@@ -1,0 +1,12 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+.full-video {
+  position: relative;
+  height: 102vh;
+  width: 100vw;
+  video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}

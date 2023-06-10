@@ -1,0 +1,37 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.shaded-info {
+  position: absolute;
+  z-index: 10;
+  bottom: 20%;
+  left: 0;
+  height: 17%;
+  width: 100%;
+  @include flexbox(flex, column, center, center);
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 66%;
+    width: 90%;
+    padding: 0% 2%;
+    background-color: $backgroundColorTransparent;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 500;
+    color: $textColor;
+  }
+  &__cursive {
+    font-family: $cursive-font;
+    height: 34%;
+    width: 90%;
+    padding: 0px 2%;
+    background-color: $backgroundColorTransparent;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 500;
+    color: $mainColor;
+  }
+}

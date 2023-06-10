@@ -1,0 +1,65 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.custom-footer {
+  @include flexbox(flex, column, flex-start, center);
+  height: 60vh;
+  width: 100%;
+  background-color: $backgroundColor;
+  color: $textColor;
+  position: relative;
+  &__background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__wrapper {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 5;
+    @include flexbox(flex, column, space-evenly, center);
+  }
+  &__logo-wrapper {
+    height: 50%;
+    width: 93%;
+    margin: 0;
+    @include flexbox(flex, row, center, center);
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__social-media {
+    height: 10%;
+    width: 80%;
+    margin: 0;
+    @include flexbox(flex, row, space-evenly, center);
+  }
+  &__social-logo {
+    height: 100%;
+    width: 15%;
+    @include flexbox(flex, row, center, center);
+    img {
+      max-height: 85%;
+      max-width: 85%;
+      object-fit: cover;
+      @include filterGrey();
+    }
+  }
+  &__developer {
+    color: $backgroundColor;
+    position: absolute;
+    bottom: 10px;
+    z-index: 6;
+  }
+}
