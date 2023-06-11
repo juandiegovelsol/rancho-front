@@ -10,7 +10,12 @@ const Dish = ({ title, image, description, price }) => {
       </span>
       <h3 className="dish__title">{title}</h3>
       <p className="dish__description">{description}</p>
-      <p className="dish__price">{`Precio: $${price}`}</p>
+      <p className="dish__price">
+        Precio:
+        <span>{` $${Math.trunc(price / 1000)}.${
+          price % 1000 ? price % 1000 : "000"
+        }`}</span>
+      </p>
     </div>
   );
 };

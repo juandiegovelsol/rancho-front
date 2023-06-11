@@ -1,0 +1,9 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.dish-menu {
+  @include flexbox(flex, column, flex-start, center);
+  height: auto;
+  width: 100%;
+  background-color: $backgroundColor;
+}

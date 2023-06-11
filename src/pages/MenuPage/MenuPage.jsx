@@ -5,7 +5,8 @@ import { closeMenu, setMenuButton } from "../Home/homeSlice";
 import { NavBar } from "../../components/NavBar";
 import { CarrouselFull } from "../../components/CarrouselFull";
 import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
-import { MenuCategory } from "../../components/MenuCategory";
+/* import { MenuCategory } from "../../components/MenuCategory"; */
+import { AllMenuCategory } from "../../components/AllMenuCategory";
 import { CustomFooter } from "../../components/CustomFooter";
 
 import { menuCarrousel } from "../../assets/data/menuGalery";
@@ -35,7 +36,7 @@ const MenuPage = () => {
           <ShadedBottomInfo text="La auténtica comida colombiana en El Rancho" />
         </CarrouselFull>
 
-        <MenuCategory category={menu[0]} />
+        <AllMenuCategory menu={menu} />
 
         <CustomFooter
           logo={logo}

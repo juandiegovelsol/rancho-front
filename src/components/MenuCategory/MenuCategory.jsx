@@ -5,10 +5,10 @@ import { Dish } from "../Dish";
 
 import "./menu-category.scss";
 
-const MenuCategory = ({ category }) => {
+const MenuCategory = ({ type, dishes }) => {
   const [open, setOpen] = useState(false);
-  const { type } = category || "";
-  const { dishes } = category || [];
+  /* const { type } = category || "";
+  const { dishes } = category || []; */
 
   const handleCategory = () => {
     open ? setOpen(false) : setOpen(true);
@@ -37,7 +37,8 @@ const MenuCategory = ({ category }) => {
 };
 
 MenuCategory.propTypes = {
-  category: PropTypes.object,
+  type: PropTypes.string,
+  dishes: PropTypes.array,
 };
 
 export default MenuCategory;
