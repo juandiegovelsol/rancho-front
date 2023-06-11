@@ -1,0 +1,51 @@
+.carrousel-full {
+  height: 100vh;
+  width: 100vw;
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+.carrousel-full .empty-space {
+  min-height: 6vh;
+  width: 100%;
+}
+/* .carrousel-full__title {
+  margin-top: 5vh;
+  margin-bottom: 2vh;
+} */
+.carrousel-full .carousel .slide .carousel-dark {
+  height: 94vh;
+  max-height: 94vh;
+  max-width: 100vw;
+  min-height: 94vh;
+  min-width: 100vw;
+}
+.carrousel-full .carousel-inner {
+  max-height: 94vh;
+  max-width: 100vw;
+  min-height: 94vh;
+  min-width: 100vw;
+}
+.carrousel-full .d-block .w-100 {
+  min-height: 94vh;
+
+  max-height: 94vh;
+  width: 100vw;
+  object-fit: cover;
+}
+.carrousel-full .carousel-caption {
+  position: absolute;
+  top: 39vh;
+}
+.carrousel-full .carousel-indicators {
+  position: absolute;
+  bottom: 15vh;
+  visibility: hidden;
+}
+.carrousel-full .carousel-control-next,
+.carrousel-full .carousel-control-prev {
+  visibility: hidden;
+}
