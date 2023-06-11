@@ -34,34 +34,34 @@
   margin-top: 5vh;
   margin-bottom: 2vh;
 }
-.carousel .slide .carousel-dark {
+.carrousel .carousel .slide .carousel-dark {
   height: 50vh;
   max-height: 100vh;
   max-width: 100vw;
   min-height: 50vh;
   min-width: 100vw;
 }
-.carousel-inner {
+.carrousel .carousel-inner {
   max-height: 100vh;
   max-width: 100vw;
   min-height: 50vh;
   min-width: 100vw;
 }
-.d-block .w-100 {
+.carrousel .d-block .w-100 {
   height: auto;
   max-height: 400px;
   max-width: 100vw;
 }
-.carousel-caption {
+.carrousel .carousel-caption {
   position: absolute;
   top: 39vh;
 }
-.carousel-indicators {
+.carrousel .carousel-indicators {
   position: absolute;
   top: 36vh;
 }
-.carousel-control-next,
-.carousel-control-prev {
+.carrousel .carousel-control-next,
+.carrousel .carousel-control-prev {
   height: 40vh;
   color: #f5f5dc;
 }
