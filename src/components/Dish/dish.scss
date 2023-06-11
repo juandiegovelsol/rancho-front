@@ -1,27 +1,7 @@
 @import "../../styles/variables.scss";
 @import "../../styles//mixins.scss";
 
-.menu-category {
-  @include flexbox(flex, column, flex-start, center);
-  height: auto;
-  min-height: 6vh;
-  width: 100%;
-  background-color: $backgroundColor;
-  color: $textColor;
-  &__handler {
-    @include flexbox(flex, row, center, center);
-    height: 6vh;
-    width: 100%;
-    background-color: $mainColor;
-  }
-  &__content {
-    @include flexbox(flex, column, flex-start, center);
-    height: auto;
-    width: 100%;
-    background-color: $backgroundColor;
-  }
-}
-/* .dish {
+.dish {
   @include flexbox(flex, column, flex-start, center);
   height: auto;
   min-height: 50vh;
@@ -54,4 +34,4 @@
     width: 80%;
     @include flexbox(flex, row, center, center);
   }
-} */
+}

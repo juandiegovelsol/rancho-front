@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+import { Dish } from "../Dish";
+
 import "./menu-category.scss";
 
 const MenuCategory = ({ category }) => {
@@ -19,15 +21,14 @@ const MenuCategory = ({ category }) => {
       {open && (
         <span className="menu-category__content">
           {dishes.length &&
-            dishes.map((dish) => (
-              <div className="dish" key={dish.title}>
-                <span className="dish__image-wrapper">
-                  <img className="dish__image" src={dish.image} alt="dish" />
-                </span>
-                <h3 className="dish__title">{dish.title}</h3>
-                <p className="dish__description">{dish.description}</p>
-                <p className="dish__price">{`Precio: $${dish.price}`}</p>
-              </div>
+            dishes.map(({ title, image, description, price }) => (
+              <Dish
+                key={title}
+                title={title}
+                image={image}
+                description={description}
+                price={price}
+              />
             ))}
         </span>
       )}
