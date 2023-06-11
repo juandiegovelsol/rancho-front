@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import "./dish.scss";
 
-const Dish = ({ title, image, description, price }) => {
+const Dish = ({ title, image, description, price, children }) => {
   return (
     <div className="dish">
       <span className="dish__image-wrapper">
@@ -16,6 +16,7 @@ const Dish = ({ title, image, description, price }) => {
           price % 1000 ? price % 1000 : "000"
         }`}</span>
       </p>
+      {children}
     </div>
   );
 };
@@ -25,6 +26,7 @@ Dish.propTypes = {
   image: PropTypes.any,
   description: PropTypes.string,
   price: PropTypes.number,
+  children: PropTypes.node,
 };
 
 export default Dish;
