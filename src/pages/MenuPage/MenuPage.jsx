@@ -1,11 +1,15 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { closeMenu, setMenuButton } from "../Home/homeSlice";
+import {
+  getCategoriesAsync,
+  getDishesAsync,
+  selectMenuPage,
+} from "./menuPageSlice";
 import { NavBar } from "../../components/NavBar";
 import { CarrouselFull } from "../../components/CarrouselFull";
 import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
-/* import { MenuCategory } from "../../components/MenuCategory"; */
 import { AllMenuCategory } from "../../components/AllMenuCategory";
 import { CustomFooter } from "../../components/CustomFooter";
 
@@ -13,12 +17,11 @@ import { menuCarrousel } from "../../assets/data/menuGalery";
 import footer from "../../assets/images/footer.jpg";
 import logo from "../../assets/images/logo.png";
 import { socialMedia } from "../../assets/data/homeGalery";
-import { menu } from "../../assets/data/menuGalery";
-
 import "./menu-page.scss";
 
 const MenuPage = () => {
   const dispatch = useDispatch();
+  const { categories, dishes } = useSelector(selectMenuPage);
   const handleCloseMenu = () => {
     dispatch(closeMenu());
   };
@@ -26,6 +29,8 @@ const MenuPage = () => {
   useEffect(() => {
     dispatch(setMenuButton());
     dispatch(closeMenu());
+    dispatch(getCategoriesAsync());
+    dispatch(getDishesAsync());
   }, []);
 
   return (
@@ -36,7 +41,7 @@ const MenuPage = () => {
           <ShadedBottomInfo text="La auténtica comida colombiana en El Rancho" />
         </CarrouselFull>
 
-        <AllMenuCategory menu={menu} />
+        <AllMenuCategory menu={categories} dishes={dishes} />
 
         <CustomFooter
           logo={logo}

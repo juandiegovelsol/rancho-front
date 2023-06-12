@@ -6,7 +6,7 @@ import { AddToCart } from "../AddToCart";
 
 import "./menu-category.scss";
 
-const MenuCategory = ({ type, dishes }) => {
+const MenuCategory = ({ type, menu_section, dishes }) => {
   const [open, setOpen] = useState(false);
   /* const { type } = category || "";
   const { dishes } = category || []; */
@@ -22,17 +22,23 @@ const MenuCategory = ({ type, dishes }) => {
       {open && (
         <span className="menu-category__content">
           {dishes.length &&
-            dishes.map(({ title, image, description, price, index }) => (
-              <Dish
-                key={title}
-                title={title}
-                image={image}
-                description={description}
-                price={price}
-              >
-                <AddToCart key={description} index={index} quantity={0} />
-              </Dish>
-            ))}
+            dishes.map(
+              ({ title, image, description, section, price, index }) => {
+                if (menu_section === section) {
+                  return (
+                    <Dish
+                      key={title}
+                      title={title}
+                      image={image}
+                      description={description}
+                      price={price}
+                    >
+                      <AddToCart key={description} index={index} quantity={0} />
+                    </Dish>
+                  );
+                }
+              }
+            )}
         </span>
       )}
     </div>
@@ -42,6 +48,7 @@ const MenuCategory = ({ type, dishes }) => {
 MenuCategory.propTypes = {
   type: PropTypes.string,
   dishes: PropTypes.array,
+  menu_section: PropTypes.string,
 };
 
 export default MenuCategory;
