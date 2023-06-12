@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { closeMenu, setMenuButton } from "../Home/homeSlice";
+import { closeMenu, setMenuButton, selectHome } from "../Home/homeSlice";
 import {
   getCategoriesAsync,
   getDishesAsync,
@@ -21,16 +21,23 @@ import "./menu-page.scss";
 
 const MenuPage = () => {
   const dispatch = useDispatch();
-  const { categories, dishes } = useSelector(selectMenuPage);
+  const { categories, dishes, cart } = useSelector(selectMenuPage);
+  const { menuHandler } = useSelector(selectHome);
   const handleCloseMenu = () => {
-    dispatch(closeMenu());
+    if (menuHandler) {
+      dispatch(closeMenu());
+    }
   };
 
   useEffect(() => {
     dispatch(setMenuButton());
     dispatch(closeMenu());
-    dispatch(getCategoriesAsync());
-    dispatch(getDishesAsync());
+    if (!categories.length) {
+      dispatch(getCategoriesAsync());
+    }
+    if (!dishes.length) {
+      dispatch(getDishesAsync());
+    }
   }, []);
 
   return (
@@ -41,7 +48,7 @@ const MenuPage = () => {
           <ShadedBottomInfo text="La auténtica comida colombiana en El Rancho" />
         </CarrouselFull>
 
-        <AllMenuCategory menu={categories} dishes={dishes} />
+        <AllMenuCategory menu={categories} dishes={dishes} cart={cart} />
 
         <CustomFooter
           logo={logo}

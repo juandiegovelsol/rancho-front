@@ -1,16 +1,33 @@
 import PropTypes from "prop-types";
 
+import { useDispatch } from "react-redux";
+import { addQuantity, subsQuantity } from "../../pages/MenuPage/menuPageSlice";
+
+import subscart from "../../assets/icons/subs-cart.svg";
+import addcart from "../../assets/icons/add-cart.svg";
+
 import "./add-to-cart.scss";
 
-const AddToCart = ({ index, quantity, sum = () => {}, subs = () => {} }) => {
+const AddToCart = ({ index, quantity }) => {
+  const dispatch = useDispatch();
   return (
     <div className="add-cart">
-      <button className="add-cart__subs" onClick={subs()}>
-        -
+      <button
+        className="add-cart__subs"
+        onClick={() => {
+          dispatch(subsQuantity(index));
+        }}
+      >
+        <img src={subscart} alt="add" />
       </button>
       <span className="add-cart__quant">{quantity}</span>
-      <button className="add-cart__sum" onClick={sum()}>
-        +
+      <button
+        className="add-cart__sum"
+        onClick={() => {
+          dispatch(addQuantity(index));
+        }}
+      >
+        <img src={addcart} alt="add" />
       </button>
     </div>
   );
@@ -19,8 +36,6 @@ const AddToCart = ({ index, quantity, sum = () => {}, subs = () => {} }) => {
 AddToCart.propTypes = {
   index: PropTypes.number,
   quantity: PropTypes.number,
-  sum: PropTypes.func,
-  subs: PropTypes.func,
 };
 
 export default AddToCart;

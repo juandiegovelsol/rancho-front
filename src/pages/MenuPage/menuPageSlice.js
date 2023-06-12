@@ -3,7 +3,6 @@ import { getCategories, getDishes } from "./menuPageAPI";
 
 const initialState = {
   cart: [],
-  quantities: [],
   categories: [],
   dishes: [],
 };
@@ -30,18 +29,22 @@ const menuPageSlice = createSlice({
     clearCart: (state) => {
       state.cart = [];
     },
-    clearQuantities: (state) => {
-      state.quantities = [];
-    },
     clearCategories: (state) => {
       state.categories = [];
     },
     clearDishes: (state) => {
       state.dishes = [];
     },
-    /* addQuantity:(state,action) => {
-        state.
-    }, */
+    addQuantity: (state, action) => {
+      state.cart[action.payload].quantity =
+        state.cart[action.payload].quantity + 1;
+    },
+    subsQuantity: (state, action) => {
+      if (state.cart[action.payload].quantity > 0) {
+        state.cart[action.payload].quantity =
+          state.cart[action.payload].quantity - 1;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -51,14 +54,21 @@ const menuPageSlice = createSlice({
       .addCase(getDishesAsync.fulfilled, (state, action) => {
         state.dishes = action.payload;
         const dishes = action.payload;
-        dishes.map((item) => state.cart.push({ ...item, quantity: 0 }));
-        /* state.quantities = new Array(action.payload.length).fill(0); */
+        console.log(state.cart);
+        if (state.cart.length === 0) {
+          dishes.map((item) => state.cart.push({ ...item, quantity: 0 }));
+        }
       });
   },
 });
 
-export const { clearCart, clearQuantities, clearCategories, clearDishes } =
-  menuPageSlice.actions;
+export const {
+  clearCart,
+  clearCategories,
+  clearDishes,
+  addQuantity,
+  subsQuantity,
+} = menuPageSlice.actions;
 
 export const selectMenuPage = (state) => state.menuPage;
 

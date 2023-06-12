@@ -11,9 +11,19 @@
   &__subs,
   &__sum,
   &__quant {
+    height: 90%;
     background-color: transparent;
     @include flexbox(flex, row, center, center);
     flex-grow: 1;
     border: none;
+  }
+  &__subs,
+  &__sum {
+    img {
+      height: 80%;
+      @include flexbox(flex, row, center, center);
+      object-fit: cover;
+      @include filterGrey();
+    }
   }
 }

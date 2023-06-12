@@ -3,7 +3,7 @@ import { MenuCategory } from "../MenuCategory";
 
 import "./all-menu-category.scss";
 
-const AllMenuCategory = ({ menu, dishes }) => {
+const AllMenuCategory = ({ menu, dishes, cart }) => {
   return (
     <article className="dish-menu">
       {menu.length &&
@@ -13,6 +13,7 @@ const AllMenuCategory = ({ menu, dishes }) => {
             type={type}
             menu_section={section}
             dishes={dishes}
+            cart={cart}
           />
         ))}
     </article>
@@ -22,6 +23,7 @@ const AllMenuCategory = ({ menu, dishes }) => {
 AllMenuCategory.propTypes = {
   menu: PropTypes.array,
   dishes: PropTypes.array,
+  cart: PropTypes.array,
 };
 
 export default AllMenuCategory;
