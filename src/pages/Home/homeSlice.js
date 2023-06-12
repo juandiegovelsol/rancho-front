@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   loading: false,
   menuHandler: false,
+  cartHandler: false,
+  accountHandler: false,
   homeButtonHandler: false,
   menuButtonHandler: false,
   reserveButtonHandler: false,
@@ -17,11 +19,37 @@ const homeSlice = createSlice({
     openMenu: (state) => {
       if (!state.menuHandler) {
         state.menuHandler = true;
+        state.accountHandler = false;
+        state.cartHandler = false;
       }
     },
     closeMenu: (state) => {
       if (state.menuHandler) {
         state.menuHandler = false;
+      }
+    },
+    openAccount: (state) => {
+      if (!state.accountHandler) {
+        state.menuHandler = false;
+        state.accountHandler = true;
+        state.cartHandler = false;
+      }
+    },
+    closeAccount: (state) => {
+      if (state.accountHandler) {
+        state.accountHandler = false;
+      }
+    },
+    openCart: (state) => {
+      if (!state.cartHandler) {
+        state.menuHandler = false;
+        state.accountHandler = false;
+        state.cartHandler = true;
+      }
+    },
+    closeCart: (state) => {
+      if (state.cartHandler) {
+        state.cartHandler = false;
       }
     },
     setHomeButton: (state) => {
@@ -65,6 +93,10 @@ const homeSlice = createSlice({
 export const {
   openMenu,
   closeMenu,
+  openAccount,
+  closeAccount,
+  openCart,
+  closeCart,
   setHomeButton,
   setMenuButton,
   setReserveButton,
