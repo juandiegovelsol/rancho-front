@@ -4,13 +4,13 @@
   position: fixed;
   z-index: 20;
   top: 0;
-  height: 6%;
+  min-height: 6vh;
   width: 100%;
   @include flexbox(flex, column, flex-start, center);
   &__header {
     width: 100%;
-    max-height: 100%;
-    padding: 0px 4% 0px 5%;
+    min-height: 6vh;
+    padding: 0px 2% 0px 5%;
     @include flexbox(flex, row, space-between, center);
     background-color: $mainColor;
   }
@@ -23,7 +23,7 @@
   &__menu-button {
     @include flexbox(flex, row, center, center);
     max-height: 100%;
-    max-width: 12%;
+    max-width: 13%;
     border: none;
     background-color: transparent;
     flex-grow: 1;
@@ -33,7 +33,7 @@
     }
     img {
       height: 100%;
-      width: 50%;
+      width: 60%;
       object-fit: contain;
       @include filterGrey();
     }

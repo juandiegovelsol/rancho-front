@@ -1,8 +1,10 @@
 @import "../../styles/variables.scss";
 @import "../../styles//mixins.scss";
 .add-cart {
+  min-height: 4vh;
   height: 4vh;
   width: 25%;
+  min-width: 100px;
   border: 3px solid $mainColor;
   border-radius: 2vh;
   overflow: hidden;
