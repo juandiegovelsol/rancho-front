@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { closeMenu, setHomeButton } from "./homeSlice";
+import { closeMenu, setHomeButton, selectHome } from "./homeSlice";
 import { NavBar } from "../../components/NavBar";
 import { FullVideo } from "../../components/FullVideo";
 import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
@@ -27,8 +27,11 @@ import "./home.scss";
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { menuHandler } = useSelector(selectHome);
   const handleCloseMenu = () => {
-    dispatch(closeMenu());
+    if (menuHandler) {
+      dispatch(closeMenu());
+    }
   };
 
   const redirect = (link) => {

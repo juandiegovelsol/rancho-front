@@ -15,10 +15,14 @@ const homeSlice = createSlice({
   initialState,
   reducers: {
     openMenu: (state) => {
-      state.menuHandler = true;
+      if (!state.menuHandler) {
+        state.menuHandler = true;
+      }
     },
     closeMenu: (state) => {
-      state.menuHandler = false;
+      if (state.menuHandler) {
+        state.menuHandler = false;
+      }
     },
     setHomeButton: (state) => {
       state.homeButtonHandler = true;

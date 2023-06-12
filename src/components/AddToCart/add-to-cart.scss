@@ -1,0 +1,29 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+.add-cart {
+  height: 4vh;
+  width: 25%;
+  border: 3px solid $mainColor;
+  border-radius: 2vh;
+  overflow: hidden;
+  @include flexbox(flex, row, flex-start, center);
+  margin-top: 2vh;
+  &__subs,
+  &__sum,
+  &__quant {
+    height: 90%;
+    background-color: transparent;
+    @include flexbox(flex, row, center, center);
+    flex-grow: 1;
+    border: none;
+  }
+  &__subs,
+  &__sum {
+    img {
+      height: 80%;
+      @include flexbox(flex, row, center, center);
+      object-fit: cover;
+      @include filterGrey();
+    }
+  }
+}

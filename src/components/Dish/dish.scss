@@ -1,0 +1,42 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.dish {
+  @include flexbox(flex, column, flex-start, center);
+  height: auto;
+  min-height: 50vh;
+  width: 100%;
+  margin: 3vh 0%;
+  &__image-wrapper {
+    height: 50vh;
+    width: 80%;
+    @include flexbox(flex, row, center, center);
+  }
+  &__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    @include flexbox(flex, row, center, center);
+  }
+  &__title {
+    width: 80%;
+    @include flexbox(flex, row, center, center);
+    text-align: center;
+    border-bottom: 3px solid $mainColor;
+    padding: 1vh 0px;
+  }
+  &__description {
+    max-width: 80%;
+    @include flexbox(flex, row, center, center);
+    text-align: center;
+  }
+  &__price {
+    margin-top: 2vh;
+    width: 80%;
+    @include flexbox(flex, row, center, center);
+    span {
+      margin-left: 1vw;
+      color: $mainColor;
+    }
+  }
+}

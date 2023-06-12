@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+import { Dish } from "../Dish";
+import { AddToCart } from "../AddToCart";
+
 import "./menu-category.scss";
 
-const MenuCategory = ({ category }) => {
+const MenuCategory = ({ type, menu_section, dishes, cart }) => {
   const [open, setOpen] = useState(false);
-  const { type } = category || "";
-  const { dishes } = category || [];
 
   const handleCategory = () => {
     open ? setOpen(false) : setOpen(true);
@@ -19,16 +20,29 @@ const MenuCategory = ({ category }) => {
       {open && (
         <span className="menu-category__content">
           {dishes.length &&
-            dishes.map((dish) => (
-              <div className="dish" key={dish.title}>
-                <span className="dish__image-wrapper">
-                  <img className="dish__image" src={dish.image} alt="dish" />
-                </span>
-                <h3 className="dish__title">{dish.title}</h3>
-                <p className="dish__description">{dish.description}</p>
-                <p className="dish__price">{`Precio: $${dish.price}`}</p>
-              </div>
-            ))}
+            dishes.map(
+              ({ title, image, description, section, price }, index) => {
+                const { quantity } = cart[index] || 0;
+
+                if (menu_section === section) {
+                  return (
+                    <Dish
+                      key={title}
+                      title={title}
+                      image={image}
+                      description={description}
+                      price={price}
+                    >
+                      <AddToCart
+                        key={description}
+                        index={index}
+                        quantity={quantity}
+                      />
+                    </Dish>
+                  );
+                }
+              }
+            )}
         </span>
       )}
     </div>
@@ -36,7 +50,10 @@ const MenuCategory = ({ category }) => {
 };
 
 MenuCategory.propTypes = {
-  category: PropTypes.object,
+  type: PropTypes.string,
+  dishes: PropTypes.array,
+  menu_section: PropTypes.string,
+  cart: PropTypes.array,
 };
 
 export default MenuCategory;
