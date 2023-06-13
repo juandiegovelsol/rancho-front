@@ -14,4 +14,23 @@
   &__calendar {
     @include flexbox(flex, column, flex-start, center);
   }
+  &__wrapper {
+    width: 100%;
+    margin: 3vh 0px;
+    @include flexbox(flex, row, space-evenly, center);
+  }
+  &__state-selector {
+    border: none;
+    border-radius: 5px;
+    background-color: $backgroundColor;
+    margin: 0px 5vw 0px 1vw;
+  }
+  &__button {
+    height: 4vh;
+    min-width: 100px;
+    background-color: $backgroundColor;
+    border: 3px solid $mainColor;
+    border-radius: 2vh;
+    margin-bottom: 3vh;
+  }
 }
