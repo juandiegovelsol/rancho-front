@@ -1,13 +1,17 @@
 @import "../../styles/variables.scss";
 @import "../../styles//mixins.scss";
-.menu-page {
+.reservation {
   @include flexbox(flex, column, flex-start, center);
+  min-width: 100vw;
+  height: auto;
   background-color: $backgroundColor;
-  height: 100%;
-  width: 100%;
-  &__content {
+  color: $textColor;
+  &__announce {
+    padding: 0px 5% 5% 5%;
+    @include flexbox(flex, row, center, center);
+    text-align: center;
+  }
+  &__calendar {
     @include flexbox(flex, column, flex-start, center);
-    min-width: 100%;
-    background-color: $backgroundColor;
   }
 }
