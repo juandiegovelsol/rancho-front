@@ -26,7 +26,7 @@ const ReservationForm = () => {
   return (
     <section className="reservation">
       <p className="reservation__announce">
-        Para reservar en dia de semana deben ser al menos 15 personas
+        Para reserva en dia de semana comunícate via whatsapp
       </p>
       <p className="reservation__announce">
         Para reservas mayores de 20 personas comunícate vía whatsapp
