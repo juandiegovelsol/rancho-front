@@ -1,8 +1,13 @@
 @import "../../styles/variables.scss";
 @import "../../styles//mixins.scss";
-.event-page {
+.menu-page {
   @include flexbox(flex, column, flex-start, center);
   background-color: $backgroundColor;
   height: 100%;
   width: 100%;
+  &__content {
+    @include flexbox(flex, column, flex-start, center);
+    min-width: 100%;
+    background-color: $backgroundColor;
+  }
 }

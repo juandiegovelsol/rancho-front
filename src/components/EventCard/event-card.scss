@@ -1,0 +1,48 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.event-card {
+  width: 90%;
+  padding: 3%;
+  height: auto;
+  margin-top: 3vh;
+  @include flexbox(flex, column, center, flex-start);
+  &:nth-child(odd) {
+    background-color: $backgroundColor;
+    border: 3px solid $mainColor;
+  }
+  &:nth-child(even) {
+    background-color: $backgroundColor;
+    border: 3px solid $secondColor;
+  }
+  &__title {
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 2vh;
+  }
+  &__text {
+    height: auto;
+    font-size: 15px;
+    text-align: left;
+  }
+  &__list {
+    height: auto;
+    margin-top: 2vh;
+  }
+  &__list-item {
+    font-size: 15px;
+    text-align: left;
+    margin-bottom: 0.5vh;
+  }
+  &__image {
+    height: 30vh;
+    width: 100%;
+    @include flexbox(flex, row, center, center);
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      @include flexbox(flex, row, center, center);
+    }
+  }
+}
