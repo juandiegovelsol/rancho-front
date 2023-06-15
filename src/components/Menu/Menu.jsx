@@ -9,7 +9,6 @@ const Menu = () => {
     menuButtonHandler,
     reserveButtonHandler,
     eventButtonHandler,
-    contactButtonHanlder,
   } = useSelector(selectHome);
   return (
     <section className="menu">
@@ -25,11 +24,11 @@ const Menu = () => {
         link="/eventos"
         isSelected={eventButtonHandler}
       />
-      <MenuButton
+      {/* <MenuButton
         text="Contacto"
         link="/contacto"
         isSelected={contactButtonHanlder}
-      />
+      /> */}
     </section>
   );
 };

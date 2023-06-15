@@ -59,6 +59,6 @@ export const socialMedia = [
   },
   {
     logo: whatsapp,
-    link: "hhttps://wa.link/u5hhng",
+    link: "https://api.whatsapp.com/send?phone=%2B573175108881&text=Hola%2C+quisiera+saber+mas+acerca+de+los+servicios+de+El+Rancho",
   },
 ];
