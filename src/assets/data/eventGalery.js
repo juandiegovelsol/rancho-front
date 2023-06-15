@@ -76,6 +76,21 @@ export const events = [
   },
   {
     title:
+      "Celebra tu cumpleaños en El Rancho: Un lugar lleno de sabor y alegría",
+    text: "Queremos convertir tu cumpleaños en un momento inolvidable. Celebra rodeado de tus seres queridos en nuestro acogedor restaurante. Con deliciosos platillos, un ambiente festivo y un servicio excepcional, te garantizamos una experiencia de cumpleaños llena de sabor y alegría",
+    list: [
+      "Decoración festiva",
+      "Entretenimiento en vivo",
+      "Tortas y postres personalizados",
+      "Fotografía y videografía profesional",
+      "Espacios privados y semiprivados",
+      "Atención personalizada",
+      "Regalos especiales",
+    ],
+    image: marriage,
+  },
+  {
+    title:
       "Cenas románticas en El Rancho: Una experiencia única cerca de la naturaleza",
     text: "En El Rancho, te invitamos a disfrutar de cenas románticas inolvidables en un entorno único y cercano a la naturaleza. Imagina una velada especial junto al lago, en nuestro encantador muelle privado. Con una deliciosa gastronomía, un ambiente romántico y la belleza natural que nos rodea, te garantizamos una experiencia gastronómica llena de amor y conexión",
     list: [
