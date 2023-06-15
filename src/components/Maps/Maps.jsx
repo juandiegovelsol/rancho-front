@@ -20,7 +20,7 @@ const Maps = ({ centerlat, centerlng }) => {
           zoom={15}
         >
           <Marker
-            position={{ lat: 2.3444659, lng: -76.686588 }}
+            position={{ lat: 2.351284, lng: -76.6896326 }}
             visible={true}
           />
         </GoogleMap>

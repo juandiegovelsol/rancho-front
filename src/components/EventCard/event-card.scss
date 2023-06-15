@@ -9,11 +9,29 @@
   @include flexbox(flex, column, center, flex-start);
   &:nth-child(odd) {
     background-color: $backgroundColor;
-    border: 3px solid $mainColor;
+    border: 3px solid $thirdColor;
+    .event-card__redirect {
+      border: 3px solid $thirdColor;
+      background-color: $thirdColor;
+      padding: 0.5vh;
+      text-decoration: none;
+      color: $textColor;
+      align-self: center;
+      margin: 1vh;
+    }
   }
   &:nth-child(even) {
     background-color: $backgroundColor;
     border: 3px solid $secondColor;
+    .event-card__redirect {
+      border: 3px solid $secondColor;
+      background-color: $secondColor;
+      padding: 1vh;
+      text-decoration: none;
+      color: $textColor2;
+      align-self: center;
+      margin: 1vh;
+    }
   }
   &__title {
     font-size: 24px;
@@ -24,6 +42,7 @@
     height: auto;
     font-size: 15px;
     text-align: left;
+    margin-bottom: 2vh;
   }
   &__list {
     height: auto;

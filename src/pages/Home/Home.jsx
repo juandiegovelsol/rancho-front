@@ -13,6 +13,7 @@ import { Maps } from "../../components/Maps";
 import { MapsWrapper } from "../../components/MapsWrapper";
 import { Carrousel } from "../../components/Carrousel";
 import { CustomFooter } from "../../components/CustomFooter";
+import { Whatsapp } from "../../components/Whatsapp";
 
 import mainVideo from "../../assets/videos/main.mp4";
 import home_resume1 from "../../assets/images/home-resume1.jpg";
@@ -102,6 +103,7 @@ const Home = () => {
           background={footer}
           socialMedia={socialMedia}
         />
+        <Whatsapp />
       </section>
     </main>
   );

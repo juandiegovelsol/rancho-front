@@ -12,6 +12,7 @@ import { CarrouselFull } from "../../components/CarrouselFull";
 import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
 import { AllMenuCategory } from "../../components/AllMenuCategory";
 import { CustomFooter } from "../../components/CustomFooter";
+import { Whatsapp } from "../../components/Whatsapp";
 
 import { menuCarrousel } from "../../assets/data/menuGalery";
 import footer from "../../assets/images/footer.jpg";
@@ -55,6 +56,7 @@ const MenuPage = () => {
           background={footer}
           socialMedia={socialMedia}
         />
+        <Whatsapp />
       </section>
     </main>
   );

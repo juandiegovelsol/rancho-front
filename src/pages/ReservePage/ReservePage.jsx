@@ -6,6 +6,7 @@ import { CustomFooter } from "../../components/CustomFooter";
 import { CarrouselFull } from "../../components/CarrouselFull";
 import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
 import { ReservationForm } from "../../components/ReservationForm";
+import { Whatsapp } from "../../components/Whatsapp";
 
 import footer from "../../assets/images/footer.jpg";
 import logo from "../../assets/images/logo.png";
@@ -45,6 +46,7 @@ const ReservePage = () => {
           background={footer}
           socialMedia={socialMedia}
         />
+        <Whatsapp />
       </section>
     </main>
   );

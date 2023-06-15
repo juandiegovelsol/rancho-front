@@ -7,6 +7,7 @@ import { CarrouselFull } from "../../components/CarrouselFull";
 import { ShadedBottomInfo } from "../../components/ShadedBottomInfo";
 import { ShadedInfo } from "../../components/ShadedInfo";
 import { EventWrapper } from "../../components/EventWrapper";
+import { Whatsapp } from "../../components/Whatsapp";
 
 import footer from "../../assets/images/footer.jpg";
 import logo from "../../assets/images/logo.png";
@@ -56,6 +57,8 @@ const EventPage = () => {
           background={footer}
           socialMedia={socialMedia}
         />
+
+        <Whatsapp />
       </section>
     </main>
   );
