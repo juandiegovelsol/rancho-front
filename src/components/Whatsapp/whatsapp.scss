@@ -7,6 +7,7 @@
   width: 60px;
   border-radius: 50px;
   overflow: hidden;
+  z-index: 50;
   @include flexbox(flex, row, center, center);
   &__icon {
     height: 100%;
