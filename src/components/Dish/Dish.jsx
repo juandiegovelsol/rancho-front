@@ -6,7 +6,7 @@ const Dish = ({ title, image, description, price, children }) => {
   return (
     <div className="dish">
       <span className="dish__image-wrapper">
-        <img className="dish__image" src={image} alt="dish" />
+        <img className="dish__image" src={image} alt="dish" loading="lazy" />
       </span>
       <h3 className="dish__title">{title}</h3>
       <p className="dish__description">{description}</p>

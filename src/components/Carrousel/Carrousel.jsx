@@ -11,7 +11,12 @@ function Carrousel({ carrousel_photos = [], title }) {
         {carrousel_photos.length &&
           carrousel_photos.map((item, index) => (
             <Carousel.Item key={index}>
-              <img className="d-block w-100" src={item.image} alt="slide" />
+              <img
+                className="d-block w-100"
+                src={item.image}
+                alt="slide"
+                loading="lazy"
+              />
               <Carousel.Caption>
                 <h5>{item.title}</h5>
               </Carousel.Caption>

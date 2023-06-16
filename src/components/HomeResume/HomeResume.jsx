@@ -5,7 +5,12 @@ const HomeResume = ({ direction = "normal", image, text, children }) => {
   return (
     <article className={`home-resume ${direction}`}>
       <span className="home-resume__image-wrapper">
-        <img src={image} alt="home-resume" className="home-resume__image" />
+        <img
+          src={image}
+          alt="home-resume"
+          className="home-resume__image"
+          loading="lazy"
+        />
       </span>
       <span className="home-resume__info">
         <p className={`home-resume__text-${direction}`}>{text}</p>

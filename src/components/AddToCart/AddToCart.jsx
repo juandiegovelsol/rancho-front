@@ -18,7 +18,7 @@ const AddToCart = ({ index, quantity }) => {
           dispatch(subsQuantity(index));
         }}
       >
-        <img src={subscart} alt="add" />
+        <img src={subscart} alt="add" loading="lazy" />
       </button>
       <span className="add-cart__quant">{quantity}</span>
       <button
@@ -27,7 +27,7 @@ const AddToCart = ({ index, quantity }) => {
           dispatch(addQuantity(index));
         }}
       >
-        <img src={addcart} alt="add" />
+        <img src={addcart} alt="add" loading="lazy" />
       </button>
     </div>
   );

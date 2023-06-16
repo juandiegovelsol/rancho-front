@@ -6,11 +6,16 @@ const CustomFooter = ({ logo, background, socialMedia }) => {
   return (
     <footer className="custom-footer">
       <span className="custom-footer__background">
-        <img src={background} />
+        <img src={background} loading="lazy" />
       </span>
       <span className="custom-footer__wrapper">
         <div className="custom-footer__logo-wrapper">
-          <img className="custom-footer__logo" src={logo} alt="logo" />
+          <img
+            className="custom-footer__logo"
+            src={logo}
+            alt="logo"
+            loading="lazy"
+          />
         </div>
         <div className="custom-footer__social-media">
           {socialMedia.length &&
@@ -22,7 +27,7 @@ const CustomFooter = ({ logo, background, socialMedia }) => {
                 rel="noopener noreferrer"
                 className="custom-footer__social-logo"
               >
-                <img src={item.logo} alt="social-media" />
+                <img src={item.logo} alt="social-media" loading="lazy" />
               </a>
             ))}
         </div>

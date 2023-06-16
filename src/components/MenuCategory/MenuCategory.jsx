@@ -20,9 +20,9 @@ const MenuCategory = ({ type, menu_section, dishes, cart }) => {
         <h2 className="menu-category__title">{type}</h2>
         <span className="menu-category__image">
           {open ? (
-            <img src={down_arrow} alt="down-arrow" />
+            <img src={down_arrow} alt="down-arrow" loading="lazy" />
           ) : (
-            <img src={up_arrow} alt="up-arrow" />
+            <img src={up_arrow} alt="up-arrow" loading="lazy" />
           )}
         </span>
       </span>

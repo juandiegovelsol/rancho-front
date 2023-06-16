@@ -36,13 +36,13 @@ const NavBar = () => {
       <article className="nav-bar__header">
         <h1 className="nav-bar__title">El Rancho</h1>
         <button onClick={handleCart} className="nav-bar__menu-button">
-          <img src={cart} alt="cart" />
+          <img src={cart} alt="cart" loading="lazy" />
         </button>
         <button onClick={handleAccount} className="nav-bar__menu-button">
-          <img src={account} alt="account" />
+          <img src={account} alt="account" loading="lazy" />
         </button>
         <button onClick={handleMenu} className="nav-bar__menu-button">
-          <img src={menu} alt="menu" />
+          <img src={menu} alt="menu" loading="lazy" />
         </button>
       </article>
       {cartHandler && (

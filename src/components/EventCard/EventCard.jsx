@@ -8,7 +8,7 @@ const EventCard = ({ index, title, text, list, image }) => {
     <article className="event-card">
       <h3 className="event-card__title">{`${index + 1}. ${title}`}</h3>
       <span className="event-card__image">
-        <img src={image} alt="event" />
+        <img src={image} alt="event" loading="lazy" />
       </span>
       <ul className="event-card__list">
         {list.length &&
