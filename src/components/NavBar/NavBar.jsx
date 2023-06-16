@@ -19,7 +19,7 @@ import "./nav-bar.scss";
 const NavBar = () => {
   const dispatch = useDispatch();
   const { menuHandler, accountHandler, cartHandler } = useSelector(selectHome);
-  const { cart: cartlist } = useSelector(selectMenuPage);
+  const { cart: cartlist, quantity } = useSelector(selectMenuPage);
 
   const handleMenu = () => {
     menuHandler ? dispatch(closeMenu()) : dispatch(openMenu());
@@ -36,6 +36,7 @@ const NavBar = () => {
       <article className="nav-bar__header">
         <h1 className="nav-bar__title">El Rancho</h1>
         <button onClick={handleCart} className="nav-bar__menu-button">
+          <p>{quantity}</p>
           <img src={cart} alt="cart" loading="lazy" />
         </button>
         <button onClick={handleAccount} className="nav-bar__menu-button">

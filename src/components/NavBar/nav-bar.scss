@@ -23,6 +23,7 @@
   &__menu-button {
     @include flexbox(flex, row, center, center);
     max-height: 100%;
+    height: 100%;
     max-width: 13%;
     border: none;
     background-color: transparent;
@@ -31,11 +32,27 @@
     &:focus {
       cursor: pointer;
     }
+    p {
+      position: relative;
+      height: 100%;
+      max-width: 10%;
+      min-width: 10%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%);
+      margin-top: 19%;
+      margin-right: 10%;
+      font-size: smaller;
+      @include flexbox(flex, row, center, center);
+    }
     img {
       height: 100%;
       width: 60%;
       object-fit: contain;
       @include filterGrey();
+      @include flexbox(flex, row, center, center);
+      /* overflow-clip-margin: none;
+      overflow: visible; */
     }
   }
   &__menu {
