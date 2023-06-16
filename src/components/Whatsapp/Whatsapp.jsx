@@ -10,7 +10,12 @@ const Whatsapp = () => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img className="whatsapp__icon" src={whatsapp_logo} alt="whatsapp" />
+      <img
+        className="whatsapp__icon"
+        src={whatsapp_logo}
+        alt="whatsapp"
+        loading="lazy"
+      />
     </a>
   );
 };

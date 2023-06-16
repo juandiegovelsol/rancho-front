@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import { Dish } from "../Dish";
 import { AddToCart } from "../AddToCart";
+import up_arrow from "../../assets/icons/up-arrow.svg";
+import down_arrow from "../../assets/icons/down-arrow.svg";
 
 import "./menu-category.scss";
 
@@ -14,9 +16,16 @@ const MenuCategory = ({ type, menu_section, dishes, cart }) => {
   };
   return (
     <div className="menu-category">
-      <h2 onClick={handleCategory} className="menu-category__handler">
-        {type}
-      </h2>
+      <span onClick={handleCategory} className="menu-category__handler">
+        <h2 className="menu-category__title">{type}</h2>
+        <span className="menu-category__image">
+          {open ? (
+            <img src={down_arrow} alt="down-arrow" loading="lazy" />
+          ) : (
+            <img src={up_arrow} alt="up-arrow" loading="lazy" />
+          )}
+        </span>
+      </span>
       {open && (
         <span className="menu-category__content">
           {dishes.length &&

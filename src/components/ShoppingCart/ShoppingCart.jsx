@@ -51,7 +51,7 @@ const ShoppingCart = ({ cartlist }) => {
             return (
               <article className="cart-card" key={`${title}${quantity}`}>
                 <span className="cart-card__image">
-                  <img src={image} alt="cart-dish" />
+                  <img src={image} alt="cart-dish" loading="lazy" />
                 </span>
                 <span className="cart-card__resume">
                   <h4>{title}</h4>
