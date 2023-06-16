@@ -24,13 +24,15 @@
     border-radius: 5px;
     background-color: $backgroundColor;
     margin: 0px 5vw 0px 1vw;
+    color: $textColor;
   }
   &__button {
     height: 4vh;
     min-width: 100px;
-    background-color: $backgroundColor;
-    border: 3px solid $mainColor;
-    border-radius: 2vh;
+    background-color: $thirdColor;
+    border: 3px solid $thirdColor;
+    /* border-radius: 2vh; */
     margin-bottom: 3vh;
+    color: $textColor;
   }
 }
