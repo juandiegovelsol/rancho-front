@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getUser } from "./homeAPI";
 
 const initialState = {
   loading: false,
@@ -10,7 +11,16 @@ const initialState = {
   reserveButtonHandler: false,
   eventButtonHandler: false,
   contactButtonHanlder: false,
+  user: {},
 };
+
+export const getUserAsync = createAsyncThunk(
+  "home/getUser",
+  async ({ key, value }) => {
+    const data = await getUser({ key, value });
+    return data;
+  }
+);
 
 const homeSlice = createSlice({
   name: "home",
@@ -87,6 +97,16 @@ const homeSlice = createSlice({
       state.eventButtonHandler = false;
       state.contactButtonHanlder = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserAsync.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUserAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      });
   },
 });
 

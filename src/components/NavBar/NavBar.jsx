@@ -11,6 +11,7 @@ import {
 import { Menu } from "../../components/Menu";
 import { selectMenuPage } from "../../pages/MenuPage/menuPageSlice";
 import { ShoppingCart } from "../ShoppingCart";
+import { Login } from "../Login";
 import menu from "../../assets/icons/menu.svg";
 import account from "../../assets/icons/account.svg";
 import cart from "../../assets/icons/cart.svg";
@@ -53,7 +54,7 @@ const NavBar = () => {
       )}
       {accountHandler && (
         <article className="nav-bar__menu">
-          <Menu />
+          <Login />
         </article>
       )}
       {menuHandler && (

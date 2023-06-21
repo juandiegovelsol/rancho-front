@@ -7,6 +7,8 @@
   color: $secondColor;
   border: 2px solid $secondColor;
   border-radius: 5px;
+  max-height: 5vh;
+  max-width: 30vw;
   @include flexbox(flex, row, center, center);
   &:active {
     background-color: $mainColor;

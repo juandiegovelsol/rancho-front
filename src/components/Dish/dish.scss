@@ -4,7 +4,7 @@
 .dish {
   @include flexbox(flex, column, flex-start, center);
   height: auto;
-  min-height: 50vh;
+  min-height: 20vh;
   width: 100%;
   margin: 3vh 0%;
   &__image-wrapper {
