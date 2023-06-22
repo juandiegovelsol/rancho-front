@@ -17,7 +17,11 @@ import { getUserAsync } from "../../pages/Home/homeSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
-  const { user: userState, logoutHandler } = useSelector(selectHome);
+  const {
+    user: userState,
+    logoutHandler,
+    userLoading,
+  } = useSelector(selectHome);
   const { name, lastname, email } = userState || "";
   const { status, admin } = userState || false;
 
@@ -42,20 +46,23 @@ const Login = () => {
   }, [user]);
 
   useEffect(() => {
-    if (userState === {} && user !== undefined) {
-      const { name, lastname, email } = user;
-      const status = false;
-      const admin = false;
-      dispatch(createUserAsync({ name, lastname, email, status, admin }));
-    }
-    if (userState !== {} && user !== undefined) {
-      const { status: actualStatus } = userState || false;
-      const { email } = userState || "";
-      if (!actualStatus && email && !logoutHandler) {
+    if (!userLoading && user !== undefined) {
+      if (Object.keys(userState).length !== 0) {
+        const { status: actualStatus } = userState || false;
+        const { email } = userState || "";
+        if (!actualStatus && email && !logoutHandler) {
+          console.log(actualStatus, email, logoutHandler);
+          const status = true;
+          const key = "email";
+          const value = email;
+          dispatch(updateUserAsync({ key, value, status }));
+        }
+      } else {
+        console.log(userState);
+        const { name, lastname, email } = user;
         const status = true;
-        const key = "email";
-        const value = email;
-        dispatch(updateUserAsync({ key, value, status }));
+        const admin = false;
+        dispatch(createUserAsync({ name, lastname, email, status, admin }));
       }
     }
   }, [userState]);
@@ -71,6 +78,8 @@ const Login = () => {
     <section className="login">
       {status && isAuthenticated && (
         <>
+          {admin && <p>Is admin</p>}
+          {!admin && <p>Is user</p>}
           <RedirectButton text="Logout" link="" redirect={handleLogout} />
         </>
       )}

@@ -7,7 +7,11 @@ export const getUser = async ({ key, value }) => {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
+    let data = {};
+    if (response.status === 204) {
+      return data;
+    }
+    data = await response.json();
     return data;
   } catch (error) {
     console.log(error);

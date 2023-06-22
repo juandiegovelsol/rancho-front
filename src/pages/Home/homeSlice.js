@@ -12,6 +12,7 @@ const initialState = {
   eventButtonHandler: false,
   contactButtonHanlder: false,
   user: {},
+  userLoading: false,
   logoutHandler: false,
 };
 
@@ -128,15 +129,25 @@ const homeSlice = createSlice({
     builder
       .addCase(getUserAsync.pending, (state) => {
         state.loading = true;
+        state.userLoading = true;
       })
       .addCase(getUserAsync.fulfilled, (state, action) => {
         state.loading = false;
+        state.userLoading = false;
         state.user = action.payload;
       })
+      /* .addCase(createUserAsync.pending, (state) => {
+        state.userLoading = true;
+      }) */
       .addCase(createUserAsync.fulfilled, (state, action) => {
+        /* state.userLoading = false; */
         state.user = action.payload;
       })
+      /* .addCase(updateUserAsync.pending, (state) => {
+        state.userLoading = true;
+      }) */
       .addCase(updateUserAsync.fulfilled, (state, action) => {
+        /* state.userLoading = false; */
         state.user = action.payload;
       });
   },
