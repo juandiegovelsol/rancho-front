@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getUser } from "./homeAPI";
+import { createUser, getUser, updateUser } from "./homeAPI";
 
 const initialState = {
   loading: false,
@@ -12,12 +12,29 @@ const initialState = {
   eventButtonHandler: false,
   contactButtonHanlder: false,
   user: {},
+  logoutHandler: false,
 };
 
 export const getUserAsync = createAsyncThunk(
   "home/getUser",
   async ({ key, value }) => {
     const data = await getUser({ key, value });
+    return data;
+  }
+);
+
+export const createUserAsync = createAsyncThunk(
+  "home/createUser",
+  async ({ name, lastname, email, status, admin }) => {
+    const data = await createUser({ name, lastname, email, status, admin });
+    return data;
+  }
+);
+
+export const updateUserAsync = createAsyncThunk(
+  "home/updateUser",
+  async ({ key, value, ...rest }) => {
+    const data = await updateUser({ key, value, ...rest });
     return data;
   }
 );
@@ -97,6 +114,15 @@ const homeSlice = createSlice({
       state.eventButtonHandler = false;
       state.contactButtonHanlder = true;
     },
+    clearUser: (state) => {
+      state.user = {};
+    },
+    setLogoutHandler: (state) => {
+      state.logoutHandler = true;
+    },
+    clearLogoutHandler: (state) => {
+      state.logoutHandler = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -105,6 +131,12 @@ const homeSlice = createSlice({
       })
       .addCase(getUserAsync.fulfilled, (state, action) => {
         state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(createUserAsync.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.user = action.payload;
       });
   },
@@ -122,6 +154,9 @@ export const {
   setReserveButton,
   setEventButton,
   setContactButton,
+  clearUser,
+  setLogoutHandler,
+  clearLogoutHandler,
 } = homeSlice.actions;
 
 export const selectHome = (state) => state.home;
