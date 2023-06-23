@@ -5,9 +5,11 @@
   height: auto;
   min-height: 15vh;
   min-width: 80%;
-  border: 3px solid $mainColor;
-  border-radius: 5px;
-  /* background-color: $fourthColor; */
+  border-top: 3px solid $mainColor;
+  border-bottom: 3px solid $mainColor;
+  /* border: 3px solid $secondColor; */
+  /* border-radius: 5px; */
+  /* background-color: $thirdColor; */
   margin: 2vh 0px;
   @include flexbox(flex, column, space-evenly, center);
   &__form {

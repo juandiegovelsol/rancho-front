@@ -14,6 +14,7 @@ import {
   clearLoginHandler,
 } from "../../pages/Home/homeSlice";
 import { Admin } from "../Admin";
+import { Costumer } from "../Costumer";
 
 import "./login.scss";
 
@@ -89,7 +90,7 @@ const Login = () => {
       {status && (
         <>
           {admin && <Admin name={name} />}
-          {!admin && <p>Bienvenido {`${name} ${lastname}`}Is user</p>}
+          {!admin && <Costumer />}
           <RedirectButton text="Logout" link="" redirect={handleLogout} />
         </>
       )}

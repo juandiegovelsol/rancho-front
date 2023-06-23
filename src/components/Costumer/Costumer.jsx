@@ -1,21 +1,19 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectHome, updateUserAsync } from "../../pages/Home/homeSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
+
 import up_arrow from "../../assets/icons/up-arrow.svg";
 import down_arrow from "../../assets/icons/down-arrow.svg";
-import "./admin.scss";
 
-const Admin = ({ name }) => {
+import "./costumer.scss";
+
+const Costumer = () => {
   const { user } = useSelector(selectHome);
   const dispatch = useDispatch();
-  const { lastname, email } = user || "";
+  const { name, lastname, email } = user || "";
   const [open, setOpen] = useState(false);
-  const [openUsers, setOpenUsers] = useState(false);
-  const [openOrders, setOpenOrders] = useState(false);
-  const [openMenu, setOpenMenu] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
   const [userName, setUserName] = useState(name);
   const [lastName, setLastName] = useState(lastname);
@@ -38,7 +36,7 @@ const Admin = ({ name }) => {
   };
 
   return (
-    <div className="admin">
+    <div className="costumer">
       <p>{`Bienvenido ${name}`}</p>
       <Category
         down_arrow={down_arrow}
@@ -59,33 +57,8 @@ const Admin = ({ name }) => {
           setLastName={setLastName}
         />
       </Category>
-      <Category
-        down_arrow={down_arrow}
-        up_arrow={up_arrow}
-        title="Usuarios"
-        handleCategory={() => handleCategory(openUsers, setOpenUsers)}
-        open={openUsers}
-      />
-      <Category
-        down_arrow={down_arrow}
-        up_arrow={up_arrow}
-        title="Ordenes"
-        handleCategory={() => handleCategory(openOrders, setOpenOrders)}
-        open={openOrders}
-      />
-      <Category
-        down_arrow={down_arrow}
-        up_arrow={up_arrow}
-        title="Menu"
-        handleCategory={() => handleCategory(openMenu, setOpenMenu)}
-        open={openMenu}
-      />
     </div>
   );
 };
 
-Admin.propTypes = {
-  name: PropTypes.string,
-};
-
-export default Admin;
+export default Costumer;
