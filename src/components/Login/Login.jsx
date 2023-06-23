@@ -9,10 +9,13 @@ import {
   selectHome,
   setLogoutHandler,
   updateUserAsync,
+  getUserAsync,
+  setLoginHandler,
+  clearLoginHandler,
 } from "../../pages/Home/homeSlice";
+import { Admin } from "../Admin";
 
 import "./login.scss";
-import { getUserAsync } from "../../pages/Home/homeSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -21,6 +24,7 @@ const Login = () => {
     user: userState,
     logoutHandler,
     userLoading,
+    loginHandler,
   } = useSelector(selectHome);
   const { name, lastname, email } = userState || "";
   const { status, admin } = userState || false;
@@ -38,7 +42,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    if (user !== undefined) {
+    if (user !== undefined && Object.keys(userState).length === 0) {
+      dispatch(setLoginHandler());
+      console.log("get User", user);
       const key = "email";
       const value = user.email;
       dispatch(getUserAsync({ key, value }));
@@ -46,29 +52,50 @@ const Login = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!userLoading && user !== undefined) {
+    /* if (Object.keys(userState).length === 0) {
+      const key = "email";
+      const value = user.email;
+      dispatch(getUserAsync({ key, value }));
+      dispatch(clearUser());
+      logout();
+    } */
+    /* dispatch(clearUser());
+    logout(); */
+  }, []);
+
+  useEffect(() => {
+    console.log("Login", loginHandler, user);
+    if (loginHandler && user !== undefined) {
       if (Object.keys(userState).length !== 0) {
         const { status: actualStatus } = userState || false;
         const { email } = userState || "";
         if (!actualStatus && email && !logoutHandler) {
-          console.log(actualStatus, email, logoutHandler);
+          console.log("LOGGED!", actualStatus, email, logoutHandler);
           const status = true;
           const key = "email";
           const value = email;
           dispatch(updateUserAsync({ key, value, status }));
+          dispatch(clearLoginHandler());
         }
       } else {
-        console.log(userState);
+        console.log("Create user", userState);
         const { name, lastname, email } = user;
-        const status = true;
+        const status = false;
         const admin = false;
         dispatch(createUserAsync({ name, lastname, email, status, admin }));
       }
     }
-  }, [userState]);
+  }, [userState, loginHandler]);
+
+  useEffect(() => {
+    if (status && user !== undefined) {
+      dispatch(clearLoginHandler());
+    }
+  }, [status, user]);
 
   useEffect(() => {
     if (logoutHandler && !status) {
+      console.log("Logout");
       dispatch(clearLogoutHandler());
       logout();
     }
@@ -76,14 +103,15 @@ const Login = () => {
 
   return (
     <section className="login">
-      {status && isAuthenticated && (
+      {/* {console.log(status, isAuthenticated, user)} */}
+      {status && (
         <>
-          {admin && <p>Is admin</p>}
-          {!admin && <p>Is user</p>}
+          {admin && <Admin name={name} />}
+          {!admin && <p>Bienvenido {`${name} ${lastname}`}Is user</p>}
           <RedirectButton text="Logout" link="" redirect={handleLogout} />
         </>
       )}
-      {!status && !isAuthenticated && (
+      {!status && (
         <>
           <RedirectButton text="Login" link="" redirect={handleLogin} />
         </>

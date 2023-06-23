@@ -13,6 +13,7 @@ const initialState = {
   contactButtonHanlder: false,
   user: {},
   userLoading: false,
+  loginHandler: false,
   logoutHandler: false,
 };
 
@@ -124,6 +125,12 @@ const homeSlice = createSlice({
     clearLogoutHandler: (state) => {
       state.logoutHandler = false;
     },
+    setLoginHandler: (state) => {
+      state.loginHandler = true;
+    },
+    clearLoginHandler: (state) => {
+      state.loginHandler = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -136,18 +143,18 @@ const homeSlice = createSlice({
         state.userLoading = false;
         state.user = action.payload;
       })
-      /* .addCase(createUserAsync.pending, (state) => {
+      .addCase(createUserAsync.pending, (state) => {
         state.userLoading = true;
-      }) */
+      })
       .addCase(createUserAsync.fulfilled, (state, action) => {
-        /* state.userLoading = false; */
+        state.userLoading = false;
         state.user = action.payload;
       })
-      /* .addCase(updateUserAsync.pending, (state) => {
+      .addCase(updateUserAsync.pending, (state) => {
         state.userLoading = true;
-      }) */
+      })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
-        /* state.userLoading = false; */
+        state.userLoading = false;
         state.user = action.payload;
       });
   },
@@ -168,6 +175,8 @@ export const {
   clearUser,
   setLogoutHandler,
   clearLogoutHandler,
+  setLoginHandler,
+  clearLoginHandler,
 } = homeSlice.actions;
 
 export const selectHome = (state) => state.home;
