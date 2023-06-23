@@ -85,6 +85,8 @@ const Login = () => {
     }
   }, [logoutHandler, status]);
 
+  if (userLoading) return <p>Loading...</p>;
+
   return (
     <section className="login">
       {status && (

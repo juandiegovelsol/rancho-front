@@ -9,7 +9,7 @@
   background-color: $backgroundColor;
   color: $textColor;
   &__handler {
-    height: 6vh;
+    min-height: 6vh;
     width: 100%;
     background-color: $thirdColor;
     display: grid;
@@ -39,6 +39,7 @@
     @include flexbox(flex, column, flex-start, center);
     height: auto;
     width: 100%;
+
     background-color: $backgroundColor;
   }
 }

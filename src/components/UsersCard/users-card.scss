@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.users-card {
+  height: auto;
+  min-height: 15vh;
+  min-width: 80%;
+  border-top: 3px solid $mainColor;
+  border-bottom: 3px solid $mainColor;
+  /* border: 3px solid $secondColor; */
+  /* border-radius: 5px; */
+  /* background-color: $thirdColor; */
+  margin: 2vh 0px;
+  @include flexbox(flex, column, space-evenly, center);
+  &__role {
+    width: 100%;
+    @include flexbox(flex, row, space-evenly, center);
+  }
+}
