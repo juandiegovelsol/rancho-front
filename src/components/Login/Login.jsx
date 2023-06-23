@@ -44,7 +44,6 @@ const Login = () => {
   useEffect(() => {
     if (user !== undefined && Object.keys(userState).length === 0) {
       dispatch(setLoginHandler());
-      console.log("get User", user);
       const key = "email";
       const value = user.email;
       dispatch(getUserAsync({ key, value }));
@@ -52,25 +51,11 @@ const Login = () => {
   }, [user]);
 
   useEffect(() => {
-    /* if (Object.keys(userState).length === 0) {
-      const key = "email";
-      const value = user.email;
-      dispatch(getUserAsync({ key, value }));
-      dispatch(clearUser());
-      logout();
-    } */
-    /* dispatch(clearUser());
-    logout(); */
-  }, []);
-
-  useEffect(() => {
-    console.log("Login", loginHandler, user);
     if (loginHandler && user !== undefined) {
       if (Object.keys(userState).length !== 0) {
         const { status: actualStatus } = userState || false;
         const { email } = userState || "";
         if (!actualStatus && email && !logoutHandler) {
-          console.log("LOGGED!", actualStatus, email, logoutHandler);
           const status = true;
           const key = "email";
           const value = email;
@@ -78,7 +63,6 @@ const Login = () => {
           dispatch(clearLoginHandler());
         }
       } else {
-        console.log("Create user", userState);
         const { name, lastname, email } = user;
         const status = false;
         const admin = false;
@@ -95,7 +79,6 @@ const Login = () => {
 
   useEffect(() => {
     if (logoutHandler && !status) {
-      console.log("Logout");
       dispatch(clearLogoutHandler());
       logout();
     }
@@ -103,7 +86,6 @@ const Login = () => {
 
   return (
     <section className="login">
-      {/* {console.log(status, isAuthenticated, user)} */}
       {status && (
         <>
           {admin && <Admin name={name} />}
