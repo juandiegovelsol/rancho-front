@@ -7,6 +7,7 @@ import {
   getAllUsersAsync,
   changeUserRoleAsync,
   clearUpdatedUser,
+  getAllOrdersAsync,
 } from "./adminSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
@@ -20,10 +21,12 @@ const Admin = ({ name }) => {
   const { user } = useSelector(selectHome);
   const dispatch = useDispatch();
   const { lastname, email } = user || "";
-  const { loading, allUsers, updatedUser } = useSelector(selectAdmin);
+  const { loading, allUsers, updatedUser, allOrders } =
+    useSelector(selectAdmin);
   const [open, setOpen] = useState(false);
   const [openUsers, setOpenUsers] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
+  const [orderEdit, setOrderEdit] = useState([]);
   const [openMenu, setOpenMenu] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
   const [userName, setUserName] = useState(name);
@@ -53,9 +56,31 @@ const Admin = ({ name }) => {
     dispatch(changeUserRoleAsync({ key1, value1, key2, value2 }));
   };
 
+  const handleOrderEdit = (index) => {
+    if (orderEdit[index]) {
+      const newState = orderEdit.map((c, i) => {
+        if (i === index) {
+          return false;
+        } else {
+          return c;
+        }
+      });
+      setOrderEdit(newState);
+    } else {
+      const newState = orderEdit.map((c, i) => {
+        if (i === index) {
+          return true;
+        } else {
+          return c;
+        }
+      });
+      setOrderEdit(newState);
+    }
+  };
+
   useEffect(() => {
     if (openUsers) {
-      if (Object.keys(allUsers).length === 0) {
+      if (Object.keys(allOrders).length === 0) {
         const key = "_id";
         const value = user._id;
         dispatch(getAllUsersAsync({ key, value }));
@@ -71,6 +96,22 @@ const Admin = ({ name }) => {
       dispatch(clearUpdatedUser());
     }
   }, [updatedUser]);
+
+  useEffect(() => {
+    if (openOrders) {
+      if (allOrders.length === 0) {
+        const key = "_id";
+        const value = user._id;
+        dispatch(getAllOrdersAsync({ key, value }));
+      }
+    }
+  }, [openOrders]);
+
+  useEffect(() => {
+    if (allOrders.length) {
+      setOrderEdit(new Array(allOrders.length).fill(false));
+    }
+  }, [allOrders]);
 
   return (
     <div className="admin">
@@ -124,7 +165,49 @@ const Admin = ({ name }) => {
         title="Ordenes"
         handleCategory={() => handleCategory(openOrders, setOpenOrders)}
         open={openOrders}
-      />
+      >
+        {allOrders.length &&
+          allOrders.map(
+            ({ _id, user_id, date, order, total, status }, index) => {
+              const { name, lastname, email } = user_id || "";
+              const day = new Date(+date);
+              return (
+                <span className="order-card" key={_id}>
+                  <p>{`Cliente: ${name}`}</p>
+                  <p>{`Email: ${email}`}</p>
+                  <p>{`Fecha: ${day.getDate()}/${
+                    day.getMonth() + 1
+                  }/${day.getFullYear()}`}</p>
+                  <ul>
+                    {order.length &&
+                      order.map(({ id, quantity, _id }) => {
+                        const { title } = id || "";
+                        const { price } = id || 0;
+                        const total = quantity * price;
+                        return (
+                          <li
+                            key={`${id}${quantity}${_id}`}
+                          >{`${quantity} ${title}, precio $${Math.trunc(
+                            total / 1000
+                          )}.${total % 1000 ? total % 1000 : "000"}`}</li>
+                        );
+                      })}
+                  </ul>
+                  <p>{`Total: $${Math.trunc(total / 1000)}.${
+                    total % 1000 ? total % 1000 : "000"
+                  }`}</p>
+                  {!orderEdit[index] && <p>{`Estado: ${status}`}</p>}
+                  {orderEdit[index] && <p>Editar</p>}
+                  <RedirectButton
+                    text="Cambiar estado"
+                    link=""
+                    redirect={() => handleOrderEdit(index)}
+                  />
+                </span>
+              );
+            }
+          )}
+      </Category>
       <Category
         down_arrow={down_arrow}
         up_arrow={up_arrow}

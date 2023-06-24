@@ -1,10 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { changeUserRole, getAllUsers } from "./adminAPI";
+import { changeUserRole, getAllOrders, getAllUsers } from "./adminAPI";
 
 const initialState = {
   loading: false,
   allUsers: [],
   updatedUser: {},
+  allOrders: [],
 };
 
 export const getAllUsersAsync = createAsyncThunk(
@@ -19,6 +20,14 @@ export const changeUserRoleAsync = createAsyncThunk(
   "admin/updateRole",
   async ({ key1, value1, key2, value2 }) => {
     const data = await changeUserRole({ key1, value1, key2, value2 });
+    return data;
+  }
+);
+
+export const getAllOrdersAsync = createAsyncThunk(
+  "admin/getAllOrders",
+  async ({ key, value }) => {
+    const data = await getAllOrders({ key, value });
     return data;
   }
 );
@@ -45,6 +54,9 @@ const adminSlice = createSlice({
       })
       .addCase(changeUserRoleAsync.fulfilled, (state, action) => {
         state.updatedUser = action.payload;
+      })
+      .addCase(getAllOrdersAsync.fulfilled, (state, action) => {
+        state.allOrders = action.payload;
       });
   },
 });

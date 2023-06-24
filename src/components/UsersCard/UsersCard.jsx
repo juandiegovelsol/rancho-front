@@ -13,7 +13,7 @@ const UsersCard = ({
   adminid,
 }) => {
   return (
-    <span className="users-card" key={_id}>
+    <span className="users-card">
       <p>{`Email: ${email}`}</p>
       <p>{`Nombre: ${name}`}</p>
       <p>{`Apellido: ${lastname}`}</p>

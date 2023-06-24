@@ -31,3 +31,19 @@ export const changeUserRole = async ({ key1, value1, key2, value2 }) => {
     console.log(error);
   }
 };
+
+export const getAllOrders = async ({ key, value }) => {
+  const url = `${import.meta.env.VITE_API_URL}/order/${key}/${value}`;
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
