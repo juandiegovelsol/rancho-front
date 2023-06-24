@@ -1,11 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { changeUserRole, getAllOrders, getAllUsers } from "./adminAPI";
+import {
+  changeUserRole,
+  getAllOrders,
+  getAllUsers,
+  updateOrder,
+} from "./adminAPI";
 
 const initialState = {
   loading: false,
   allUsers: [],
   updatedUser: {},
   allOrders: [],
+  updatedOrder: {},
 };
 
 export const getAllUsersAsync = createAsyncThunk(
@@ -32,6 +38,14 @@ export const getAllOrdersAsync = createAsyncThunk(
   }
 );
 
+export const updateOrderAsync = createAsyncThunk(
+  "admin/updateOrder",
+  async ({ key, value, status }) => {
+    const data = await updateOrder({ key, value, status });
+    return data;
+  }
+);
+
 const adminSlice = createSlice({
   name: "admin",
   initialState,
@@ -41,6 +55,9 @@ const adminSlice = createSlice({
     },
     clearUpdatedUser: (state) => {
       state.updatedUser = {};
+    },
+    clearUpdatedOrder: (state) => {
+      state.updatedOrder = {};
     },
   },
   extraReducers: (builder) => {
@@ -57,11 +74,15 @@ const adminSlice = createSlice({
       })
       .addCase(getAllOrdersAsync.fulfilled, (state, action) => {
         state.allOrders = action.payload;
+      })
+      .addCase(updateOrderAsync.fulfilled, (state, action) => {
+        state.updatedOrder = action.payload;
       });
   },
 });
 
-export const { clearAllUsers, clearUpdatedUser } = adminSlice.actions;
+export const { clearAllUsers, clearUpdatedUser, clearUpdatedOrder } =
+  adminSlice.actions;
 
 export const selectAdmin = (state) => state.admin;
 

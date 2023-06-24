@@ -47,3 +47,22 @@ export const getAllOrders = async ({ key, value }) => {
     console.log(error);
   }
 };
+
+export const updateOrder = async ({ key, value, status }) => {
+  const url = `${import.meta.env.VITE_API_URL}/order/${key}/${value}`;
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        status,
+      }),
+    });
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

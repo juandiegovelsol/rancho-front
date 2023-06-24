@@ -7,16 +7,4 @@
   width: 100%;
   background-color: $backgroundColor;
   color: $textColor;
-  .order-card {
-    height: auto;
-    min-height: 15vh;
-    min-width: 80%;
-    border-top: 3px solid $mainColor;
-    border-bottom: 3px solid $mainColor;
-    /* border: 3px solid $secondColor; */
-    /* border-radius: 5px; */
-    /* background-color: $thirdColor; */
-    margin: 2vh 0px;
-    @include flexbox(flex, column, space-evenly, center);
-  }
 }

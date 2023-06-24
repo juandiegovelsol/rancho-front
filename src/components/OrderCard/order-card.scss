@@ -1,0 +1,23 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.order-card {
+  height: auto;
+  min-height: 15vh;
+  min-width: 80%;
+  border-top: 3px solid $mainColor;
+  border-bottom: 3px solid $mainColor;
+  margin: 2vh 0px;
+  padding: 1vh 0px;
+  @include flexbox(flex, column, space-evenly, center);
+  &__order {
+    @include flexbox(flex, column, space-evenly, center);
+    margin: 0;
+  }
+  &__selector {
+    border: none;
+    border-radius: 5px;
+    margin-left: 1vw;
+    $backgroundColor: $fourthColor;
+  }
+}

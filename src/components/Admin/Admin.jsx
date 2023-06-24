@@ -8,10 +8,13 @@ import {
   changeUserRoleAsync,
   clearUpdatedUser,
   getAllOrdersAsync,
+  updateOrderAsync,
+  clearUpdatedOrder,
 } from "./adminSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
 import { UsersCard } from "../UsersCard";
+import { OrderCard } from "../OrderCard";
 import up_arrow from "../../assets/icons/up-arrow.svg";
 import down_arrow from "../../assets/icons/down-arrow.svg";
 import "./admin.scss";
@@ -21,12 +24,13 @@ const Admin = ({ name }) => {
   const { user } = useSelector(selectHome);
   const dispatch = useDispatch();
   const { lastname, email } = user || "";
-  const { loading, allUsers, updatedUser, allOrders } =
+  const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
   const [open, setOpen] = useState(false);
   const [openUsers, setOpenUsers] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
   const [orderEdit, setOrderEdit] = useState([]);
+  const [orderState, setOrderState] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
   const [userName, setUserName] = useState(name);
@@ -48,6 +52,7 @@ const Admin = ({ name }) => {
       setUserEdit(true);
     }
   };
+
   const changeRole = (userid, adminid) => {
     const key1 = "_id";
     const value1 = adminid;
@@ -56,7 +61,7 @@ const Admin = ({ name }) => {
     dispatch(changeUserRoleAsync({ key1, value1, key2, value2 }));
   };
 
-  const handleOrderEdit = (index) => {
+  const handleOrderEdit = (index, _id) => {
     if (orderEdit[index]) {
       const newState = orderEdit.map((c, i) => {
         if (i === index) {
@@ -65,6 +70,13 @@ const Admin = ({ name }) => {
           return c;
         }
       });
+      if (orderState) {
+        const key = "_id";
+        const value = _id;
+        const status = orderState;
+        dispatch(updateOrderAsync({ key, value, status }));
+        setOrderState("");
+      }
       setOrderEdit(newState);
     } else {
       const newState = orderEdit.map((c, i) => {
@@ -112,6 +124,15 @@ const Admin = ({ name }) => {
       setOrderEdit(new Array(allOrders.length).fill(false));
     }
   }, [allOrders]);
+
+  useEffect(() => {
+    if (Object.keys(updatedOrder).length !== 0) {
+      const key = "_id";
+      const value = user._id;
+      dispatch(getAllOrdersAsync({ key, value }));
+      dispatch(clearUpdatedOrder());
+    }
+  }, [updatedOrder]);
 
   return (
     <div className="admin">
@@ -168,44 +189,21 @@ const Admin = ({ name }) => {
       >
         {allOrders.length &&
           allOrders.map(
-            ({ _id, user_id, date, order, total, status }, index) => {
-              const { name, lastname, email } = user_id || "";
-              const day = new Date(+date);
-              return (
-                <span className="order-card" key={_id}>
-                  <p>{`Cliente: ${name}`}</p>
-                  <p>{`Email: ${email}`}</p>
-                  <p>{`Fecha: ${day.getDate()}/${
-                    day.getMonth() + 1
-                  }/${day.getFullYear()}`}</p>
-                  <ul>
-                    {order.length &&
-                      order.map(({ id, quantity, _id }) => {
-                        const { title } = id || "";
-                        const { price } = id || 0;
-                        const total = quantity * price;
-                        return (
-                          <li
-                            key={`${id}${quantity}${_id}`}
-                          >{`${quantity} ${title}, precio $${Math.trunc(
-                            total / 1000
-                          )}.${total % 1000 ? total % 1000 : "000"}`}</li>
-                        );
-                      })}
-                  </ul>
-                  <p>{`Total: $${Math.trunc(total / 1000)}.${
-                    total % 1000 ? total % 1000 : "000"
-                  }`}</p>
-                  {!orderEdit[index] && <p>{`Estado: ${status}`}</p>}
-                  {orderEdit[index] && <p>Editar</p>}
-                  <RedirectButton
-                    text="Cambiar estado"
-                    link=""
-                    redirect={() => handleOrderEdit(index)}
-                  />
-                </span>
-              );
-            }
+            ({ _id, user_id, date, order, total, status }, index) => (
+              <OrderCard
+                key={date}
+                _id={_id}
+                user_id={user_id}
+                date={date}
+                order={order}
+                total={total}
+                status={status}
+                index={index}
+                orderEdit={orderEdit}
+                handleOrderEdit={handleOrderEdit}
+                setOrderState={setOrderState}
+              />
+            )
           )}
       </Category>
       <Category
