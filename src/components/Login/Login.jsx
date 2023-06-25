@@ -54,7 +54,7 @@ const Login = () => {
   useEffect(() => {
     if (loginHandler && user !== undefined) {
       if (Object.keys(userState).length !== 0) {
-        const { status: actualStatus } = userState || false;
+        const { status: actualStatus } = userState || false; //Probar quitando el || false
         const { email } = userState || "";
         if (!actualStatus && email && !logoutHandler) {
           const status = true;
@@ -84,6 +84,17 @@ const Login = () => {
       logout();
     }
   }, [logoutHandler, status]);
+
+  //New, in case of user login error or create user error delete the following useEffect
+
+  useEffect(() => {
+    if (Object.keys(userState).length !== 0 && user === undefined) {
+      const key = "email";
+      const status = false;
+      const value = email;
+      dispatch(updateUserAsync({ key, value, status }));
+    }
+  }, []);
 
   if (userLoading) return <p>Loading...</p>;
 

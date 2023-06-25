@@ -11,10 +11,15 @@ import {
   updateOrderAsync,
   clearUpdatedOrder,
 } from "./adminSlice";
+import {
+  selectMenuPage,
+  getDishesAsync,
+} from "../../pages/MenuPage/menuPageSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
 import { UsersCard } from "../UsersCard";
 import { OrderCard } from "../OrderCard";
+import { Dish } from "../Dish";
 import up_arrow from "../../assets/icons/up-arrow.svg";
 import down_arrow from "../../assets/icons/down-arrow.svg";
 import "./admin.scss";
@@ -26,12 +31,14 @@ const Admin = ({ name }) => {
   const { lastname, email } = user || "";
   const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
+  const { dishes } = useSelector(selectMenuPage);
   const [open, setOpen] = useState(false);
   const [openUsers, setOpenUsers] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
   const [orderEdit, setOrderEdit] = useState([]);
   const [orderState, setOrderState] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
+  const [menuEdit, setMenuEdit] = useState([]);
   const [userEdit, setUserEdit] = useState(false);
   const [userName, setUserName] = useState(name);
   const [lastName, setLastName] = useState(lastname);
@@ -90,6 +97,44 @@ const Admin = ({ name }) => {
     }
   };
 
+  const handleMenuEdit = (index, _id) => {
+    if (menuEdit[index]) {
+      const newState = menuEdit.map((c, i) => {
+        if (i === index) {
+          return false;
+        } else {
+          return c;
+        }
+      });
+      setMenuEdit(newState);
+    } else {
+      const newState = menuEdit.map((c, i) => {
+        if (i === index) {
+          return true;
+        } else {
+          return c;
+        }
+      });
+      setMenuEdit(newState);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const image = e.target.elements[0].files[0];
+    const title = e.target.elements[1].value;
+    const description = e.target.elements[2].value;
+    const price = e.target.elements[3].value;
+    const _id = e.target.elements[4].value;
+    const index = e.target.elements[5].value;
+    console.log(image, title, description, +price);
+    handleMenuEdit(+index, _id);
+    if (image !== undefined) {
+      console.log(image);
+      //CONTINUAR AQUI... hacer dispatch de POST image
+    }
+  };
+
   useEffect(() => {
     if (openUsers) {
       if (Object.keys(allOrders).length === 0) {
@@ -133,6 +178,16 @@ const Admin = ({ name }) => {
       dispatch(clearUpdatedOrder());
     }
   }, [updatedOrder]);
+
+  useEffect(() => {
+    if (openMenu) {
+      if (!dishes.length) {
+        dispatch(getDishesAsync());
+      } else {
+        setMenuEdit(new Array(dishes.length).fill(false));
+      }
+    }
+  }, [openMenu]);
 
   return (
     <div className="admin">
@@ -212,7 +267,43 @@ const Admin = ({ name }) => {
         title="Menu"
         handleCategory={() => handleCategory(openMenu, setOpenMenu)}
         open={openMenu}
-      />
+      >
+        {dishes.length &&
+          dishes.map(
+            ({ _id, title, image, description, section, price }, index) => (
+              <>
+                {menuEdit[index] && (
+                  <Dish
+                    key={`${title}.`}
+                    title={title}
+                    image={image}
+                    description={description}
+                    price={price}
+                    edit={menuEdit[index]}
+                    _id={_id}
+                    index={index}
+                    handleSubmit={handleSubmit}
+                  />
+                )}
+                {!menuEdit[index] && (
+                  <Dish
+                    key={`${title}..`}
+                    title={title}
+                    image={image}
+                    description={description}
+                    price={price}
+                  >
+                    <RedirectButton
+                      text="Editar"
+                      link=""
+                      redirect={() => handleMenuEdit(index, _id)}
+                    />
+                  </Dish>
+                )}
+              </>
+            )
+          )}
+      </Category>
     </div>
   );
 };

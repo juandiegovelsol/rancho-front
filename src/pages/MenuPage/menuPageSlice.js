@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCategories, getDishes } from "./menuPageAPI";
+import { getCategories, getDishes, updateDish } from "./menuPageAPI";
 
 const initialState = {
   cart: [],
   categories: [],
   dishes: [],
   quantity: 0,
+  updatedDish: {},
 };
 
 export const getCategoriesAsync = createAsyncThunk(
@@ -15,10 +16,19 @@ export const getCategoriesAsync = createAsyncThunk(
     return data;
   }
 );
+
 export const getDishesAsync = createAsyncThunk(
   "menuPage/getDishes",
   async () => {
     const data = await getDishes();
+    return data;
+  }
+);
+
+export const updateDishAsync = createAsyncThunk(
+  "menuPage/updateDish",
+  async ({ key, value, ...rest }) => {
+    const data = await updateDish({ key, value, ...rest });
     return data;
   }
 );
@@ -50,6 +60,9 @@ const menuPageSlice = createSlice({
         }
       }
     },
+    clearUpdatedDish: (state) => {
+      state.updatedDish = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -63,6 +76,9 @@ const menuPageSlice = createSlice({
         if (state.cart.length === 0) {
           dishes.map((item) => state.cart.push({ ...item, quantity: 0 }));
         }
+      })
+      .addCase(updateDishAsync.fulfilled, (state, action) => {
+        state.updatedDish = action.payload;
       });
   },
 });
@@ -73,6 +89,7 @@ export const {
   clearDishes,
   addQuantity,
   subsQuantity,
+  clearUpdatedDish,
 } = menuPageSlice.actions;
 
 export const selectMenuPage = (state) => state.menuPage;
