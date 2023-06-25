@@ -17,6 +17,7 @@ import {
   clearImageURL,
   uploadImageAsync,
   updateDishAsync,
+  createDishAsync,
 } from "../../pages/MenuPage/menuPageSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
@@ -34,7 +35,8 @@ const Admin = ({ name }) => {
   const { lastname, email } = user || "";
   const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
-  const { dishes, updatedDish, imageURL } = useSelector(selectMenuPage);
+  const { dishes, updatedDish, imageURL, createdDish } =
+    useSelector(selectMenuPage);
   const [open, setOpen] = useState(false);
   const [openUsers, setOpenUsers] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
@@ -50,6 +52,8 @@ const Admin = ({ name }) => {
   const [priceState, setPriceState] = useState(0);
   const [statusState, setStatusState] = useState(true);
   const [idState, setIdState] = useState("");
+  const [addDishState, setAddDishState] = useState(false);
+
   const handleCategory = (state, setState) => {
     state ? setState(false) : setState(true);
   };
@@ -135,8 +139,8 @@ const Admin = ({ name }) => {
     const status = e.target.elements[4].value ? true : false;
     const _id = e.target.elements[5].value;
     const index = e.target.elements[6].value;
-
     handleMenuEdit(+index, _id);
+
     if (file !== undefined) {
       const formData = new FormData();
       formData.append("file", file);
@@ -147,16 +151,37 @@ const Admin = ({ name }) => {
       setStatusState(status);
       setIdState(_id);
       dispatch(uploadImageAsync({ formData }));
-      //CONTINUAR AQUI... hacer dispatch de POST image
     } else {
       const key = "_id";
       const value = _id;
-
       console.log(file, title, description, price, status);
       dispatch(
         updateDishAsync({ key, value, title, description, price, status })
       );
     }
+  };
+
+  const handleAddDish = () => {
+    if (addDishState) {
+      setAddDishState(false);
+    } else {
+      setAddDishState(true);
+    }
+  };
+
+  const handleSubmitAddDish = (e) => {
+    e.preventDefault();
+    const key = "_id";
+    const value = user._id;
+    const title = e.target.elements[0].value;
+    const description = e.target.elements[1].value;
+    const price = +e.target.elements[2].value;
+    const section = e.target.elements[3].value;
+    console.log(e.target.elements);
+    dispatch(
+      createDishAsync({ key, value, title, description, price, section })
+    );
+    handleAddDish();
   };
 
   useEffect(() => {
@@ -242,6 +267,12 @@ const Admin = ({ name }) => {
       dispatch(clearImageURL());
     }
   }, [imageURL]);
+
+  useEffect(() => {
+    if (Object.keys(createdDish).length !== 0) {
+      dispatch(getDishesAsync());
+    }
+  }, [createdDish]);
 
   return (
     <div className="admin">
@@ -357,6 +388,41 @@ const Admin = ({ name }) => {
               </>
             )
           )}
+
+        {addDishState ? (
+          <form className="dish__form" onSubmit={handleSubmitAddDish}>
+            <label className="dish__label">Plato:</label>
+            <input
+              className="dish__input"
+              type="text"
+              defaultValue={"titulo del plato"}
+            />
+            <label className="dish__label">Descripción</label>
+            <input
+              className="dish__input"
+              type="text"
+              defaultValue={"descripcion del plato"}
+            />
+            <label className="dish__label">Precio</label>
+            <input className="dish__input" type="text" defaultValue={20000} />
+            <label className="dish__label">Tipo de plato</label>
+            <select className="dish__selector">
+              <option value="start">Entrada</option>
+              <option value="main">Plato fuerte</option>
+              <option value="side">Adicional</option>
+              <option value="drink">Bebida</option>
+            </select>
+            <button className="dish__button" type="submit">
+              Añadir
+            </button>
+          </form>
+        ) : (
+          <RedirectButton
+            text="Añadir plato"
+            link=""
+            redirect={handleAddDish}
+          />
+        )}
       </Category>
     </div>
   );

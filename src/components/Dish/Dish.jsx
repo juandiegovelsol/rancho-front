@@ -13,6 +13,7 @@ const Dish = ({
   index = 0,
   _id = "",
   handleSubmit = () => {},
+  status = true,
 }) => {
   const [imgPrev, setImgPrev] = useState(image);
 
@@ -69,22 +70,23 @@ const Dish = ({
       </div>
     );
   }
-  return (
-    <div className="dish">
-      <span className="dish__image-wrapper">
-        <img className="dish__image" src={image} alt="dish" loading="lazy" />
-      </span>
-      <h3 className="dish__title">{title}</h3>
-      <p className="dish__description">{description}</p>
-      <p className="dish__price">
-        Precio:
-        <span>{` $${Math.trunc(price / 1000)}.${
-          price % 1000 ? price % 1000 : "000"
-        }`}</span>
-      </p>
-      {children}
-    </div>
-  );
+  if (status)
+    return (
+      <div className="dish">
+        <span className="dish__image-wrapper">
+          <img className="dish__image" src={image} alt="dish" loading="lazy" />
+        </span>
+        <h3 className="dish__title">{title}</h3>
+        <p className="dish__description">{description}</p>
+        <p className="dish__price">
+          Precio:
+          <span>{` $${Math.trunc(price / 1000)}.${
+            price % 1000 ? price % 1000 : "000"
+          }`}</span>
+        </p>
+        {children}
+      </div>
+    );
 };
 
 Dish.propTypes = {
@@ -97,6 +99,7 @@ Dish.propTypes = {
   index: PropTypes.number,
   _id: PropTypes.string,
   handleSubmit: PropTypes.func,
+  status: PropTypes.bool,
 };
 
 export default Dish;

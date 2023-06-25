@@ -58,3 +58,22 @@ export const uploadImage = async ({ formData }) => {
     console.log(error);
   }
 };
+
+export const createDish = async ({ key, value, ...rest }) => {
+  const url = `${import.meta.env.VITE_API_URL}/menu/admin/${key}/${value}`;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...rest,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

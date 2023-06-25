@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  createDish,
   getCategories,
   getDishes,
   updateDish,
@@ -13,6 +14,7 @@ const initialState = {
   quantity: 0,
   updatedDish: {},
   imageURL: "",
+  createdDish: {},
 };
 
 export const getCategoriesAsync = createAsyncThunk(
@@ -43,6 +45,14 @@ export const uploadImageAsync = createAsyncThunk(
   "menuPage/uploadImage",
   async ({ formData }) => {
     const data = await uploadImage({ formData });
+    return data;
+  }
+);
+
+export const createDishAsync = createAsyncThunk(
+  "menuPage/createDish",
+  async ({ key, value, ...rest }) => {
+    const data = await createDish({ key, value, ...rest });
     return data;
   }
 );
@@ -80,6 +90,9 @@ const menuPageSlice = createSlice({
     clearImageURL: (state) => {
       state.imageURL = "";
     },
+    clearCreatedDish: (state) => {
+      state.createdDish = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,7 +102,6 @@ const menuPageSlice = createSlice({
       .addCase(getDishesAsync.fulfilled, (state, action) => {
         state.dishes = action.payload;
         const dishes = action.payload;
-        console.log(state.cart);
         if (state.cart.length === 0) {
           dishes.map((item) => state.cart.push({ ...item, quantity: 0 }));
         }
@@ -99,6 +111,9 @@ const menuPageSlice = createSlice({
       })
       .addCase(uploadImageAsync.fulfilled, (state, action) => {
         state.imageURL = action.payload;
+      })
+      .addCase(createDishAsync.fulfilled, (state, action) => {
+        state.createdDish = action.payload;
       });
   },
 });
@@ -111,6 +126,7 @@ export const {
   subsQuantity,
   clearUpdatedDish,
   clearImageURL,
+  clearCreatedDish,
 } = menuPageSlice.actions;
 
 export const selectMenuPage = (state) => state.menuPage;
