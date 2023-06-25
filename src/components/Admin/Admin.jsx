@@ -45,7 +45,11 @@ const Admin = ({ name }) => {
   const [userEdit, setUserEdit] = useState(false);
   const [userName, setUserName] = useState(name);
   const [lastName, setLastName] = useState(lastname);
-
+  const [titleState, setTitleState] = useState("");
+  const [descriptionState, setDescriptionState] = useState("");
+  const [priceState, setPriceState] = useState(0);
+  const [statusState, setStatusState] = useState(true);
+  const [idState, setIdState] = useState("");
   const handleCategory = (state, setState) => {
     state ? setState(false) : setState(true);
   };
@@ -137,6 +141,11 @@ const Admin = ({ name }) => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", "g1jf4xky");
+      setTitleState(title);
+      setDescriptionState(description);
+      setPriceState(price);
+      setStatusState(status);
+      setIdState(_id);
       dispatch(uploadImageAsync({ formData }));
       //CONTINUAR AQUI... hacer dispatch de POST image
     } else {
@@ -209,6 +218,30 @@ const Admin = ({ name }) => {
       dispatch(getDishesAsync());
     }
   }, [updatedDish]);
+
+  useEffect(() => {
+    if (imageURL) {
+      const image = imageURL;
+      const title = titleState;
+      const description = descriptionState;
+      const price = priceState;
+      const status = statusState;
+      const value = idState;
+      const key = "_id";
+      dispatch(
+        updateDishAsync({
+          key,
+          value,
+          image,
+          title,
+          description,
+          price,
+          status,
+        })
+      );
+      dispatch(clearImageURL());
+    }
+  }, [imageURL]);
 
   return (
     <div className="admin">
