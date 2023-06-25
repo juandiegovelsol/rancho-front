@@ -1,5 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCategories, getDishes, updateDish } from "./menuPageAPI";
+import {
+  getCategories,
+  getDishes,
+  updateDish,
+  uploadImage,
+} from "./menuPageAPI";
 
 const initialState = {
   cart: [],
@@ -7,6 +12,7 @@ const initialState = {
   dishes: [],
   quantity: 0,
   updatedDish: {},
+  imageURL: "",
 };
 
 export const getCategoriesAsync = createAsyncThunk(
@@ -29,6 +35,14 @@ export const updateDishAsync = createAsyncThunk(
   "menuPage/updateDish",
   async ({ key, value, ...rest }) => {
     const data = await updateDish({ key, value, ...rest });
+    return data;
+  }
+);
+
+export const uploadImageAsync = createAsyncThunk(
+  "menuPage/uploadImage",
+  async ({ formData }) => {
+    const data = await uploadImage({ formData });
     return data;
   }
 );
@@ -63,6 +77,9 @@ const menuPageSlice = createSlice({
     clearUpdatedDish: (state) => {
       state.updatedDish = {};
     },
+    clearImageURL: (state) => {
+      state.imageURL = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -79,6 +96,9 @@ const menuPageSlice = createSlice({
       })
       .addCase(updateDishAsync.fulfilled, (state, action) => {
         state.updatedDish = action.payload;
+      })
+      .addCase(uploadImageAsync.fulfilled, (state, action) => {
+        state.imageURL = action.payload;
       });
   },
 });
@@ -90,6 +110,7 @@ export const {
   addQuantity,
   subsQuantity,
   clearUpdatedDish,
+  clearImageURL,
 } = menuPageSlice.actions;
 
 export const selectMenuPage = (state) => state.menuPage;

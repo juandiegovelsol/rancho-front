@@ -55,6 +55,11 @@ const Dish = ({
           />
           <label className="dish__label">Precio</label>
           <input className="dish__input" type="text" defaultValue={price} />
+          <label className="dish__label"> Disponible:</label>
+          <select className="dish__selector">
+            <option value="true">Si</option>
+            <option value="">No</option>
+          </select>
           <input className="dish__input-hidden" defaultValue={_id} />
           <input className="dish__input-hidden" defaultValue={index} />
           <button className="dish__button" type="submit">

@@ -42,3 +42,19 @@ export const updateDish = async ({ key, value, ...rest }) => {
     console.log(error);
   }
 };
+
+export const uploadImage = async ({ formData }) => {
+  const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${
+    import.meta.env.VITE_CLOUDNAME
+  }/image/upload`;
+  try {
+    const response = await fetch(cloudinaryUrl, {
+      method: "POST",
+      body: formData,
+    });
+    const data = await response.json();
+    return data.secure_url;
+  } catch (error) {
+    console.log(error);
+  }
+};

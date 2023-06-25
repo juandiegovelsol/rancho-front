@@ -14,6 +14,9 @@ import {
 import {
   selectMenuPage,
   getDishesAsync,
+  clearImageURL,
+  uploadImageAsync,
+  updateDishAsync,
 } from "../../pages/MenuPage/menuPageSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
@@ -31,7 +34,7 @@ const Admin = ({ name }) => {
   const { lastname, email } = user || "";
   const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
-  const { dishes } = useSelector(selectMenuPage);
+  const { dishes, updatedDish, imageURL } = useSelector(selectMenuPage);
   const [open, setOpen] = useState(false);
   const [openUsers, setOpenUsers] = useState(false);
   const [openOrders, setOpenOrders] = useState(false);
@@ -121,17 +124,29 @@ const Admin = ({ name }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const image = e.target.elements[0].files[0];
+    const file = e.target.elements[0].files[0];
     const title = e.target.elements[1].value;
     const description = e.target.elements[2].value;
-    const price = e.target.elements[3].value;
-    const _id = e.target.elements[4].value;
-    const index = e.target.elements[5].value;
-    console.log(image, title, description, +price);
+    const price = +e.target.elements[3].value;
+    const status = e.target.elements[4].value ? true : false;
+    const _id = e.target.elements[5].value;
+    const index = e.target.elements[6].value;
+
     handleMenuEdit(+index, _id);
-    if (image !== undefined) {
-      console.log(image);
+    if (file !== undefined) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "g1jf4xky");
+      dispatch(uploadImageAsync({ formData }));
       //CONTINUAR AQUI... hacer dispatch de POST image
+    } else {
+      const key = "_id";
+      const value = _id;
+
+      console.log(file, title, description, price, status);
+      dispatch(
+        updateDishAsync({ key, value, title, description, price, status })
+      );
     }
   };
 
@@ -188,6 +203,12 @@ const Admin = ({ name }) => {
       }
     }
   }, [openMenu]);
+
+  useEffect(() => {
+    if (Object.keys(updatedDish).length !== 0) {
+      dispatch(getDishesAsync());
+    }
+  }, [updatedDish]);
 
   return (
     <div className="admin">
