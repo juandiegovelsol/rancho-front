@@ -84,11 +84,20 @@
     border-radius: 5px;
     max-height: 5vh;
     max-width: 30vw;
-    min-height: 4vh;
+    min-height: 5vh;
     @include flexbox(flex, row, center, center);
     &:active {
       background-color: $mainColor;
       color: $backgroundColor;
     }
+  }
+  .errase {
+    color: red;
+    border: 2px solid red;
+    margin-top: 2vh;
+  }
+  &__buttons-var {
+    min-width: 80%;
+    @include flexbox(flex, row, space-evenly, center);
   }
 }

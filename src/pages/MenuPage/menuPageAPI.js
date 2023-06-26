@@ -77,3 +77,19 @@ export const createDish = async ({ key, value, ...rest }) => {
     console.log(error);
   }
 };
+
+export const deleteDish = async ({ key, value, id }) => {
+  const url = `${import.meta.env.VITE_API_URL}/menu/${key}/${value}/${id}`;
+  try {
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};

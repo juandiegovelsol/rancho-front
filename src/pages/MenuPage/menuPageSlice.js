@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createDish,
+  deleteDish,
   getCategories,
   getDishes,
   updateDish,
@@ -15,6 +16,7 @@ const initialState = {
   updatedDish: {},
   imageURL: "",
   createdDish: {},
+  deletedDish: {},
 };
 
 export const getCategoriesAsync = createAsyncThunk(
@@ -57,6 +59,14 @@ export const createDishAsync = createAsyncThunk(
   }
 );
 
+export const deleteDishAsync = createAsyncThunk(
+  "menuPage/deleteDish",
+  async ({ key, value, id }) => {
+    const data = await deleteDish({ key, value, id });
+    return data;
+  }
+);
+
 const menuPageSlice = createSlice({
   name: "menuPage",
   initialState,
@@ -93,6 +103,9 @@ const menuPageSlice = createSlice({
     clearCreatedDish: (state) => {
       state.createdDish = {};
     },
+    clearDeletedDish: (state) => {
+      state.deletedDish = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -101,7 +114,7 @@ const menuPageSlice = createSlice({
       })
       .addCase(getDishesAsync.fulfilled, (state, action) => {
         state.dishes = action.payload;
-        const dishes = action.payload;
+        const dishes = action.payload; //eliminar el condicional
         if (state.cart.length === 0) {
           dishes.map((item) => state.cart.push({ ...item, quantity: 0 }));
         }
@@ -114,6 +127,9 @@ const menuPageSlice = createSlice({
       })
       .addCase(createDishAsync.fulfilled, (state, action) => {
         state.createdDish = action.payload;
+      })
+      .addCase(deleteDishAsync.fulfilled, (state, action) => {
+        state.deletedDish = action.payload;
       });
   },
 });
@@ -127,6 +143,7 @@ export const {
   clearUpdatedDish,
   clearImageURL,
   clearCreatedDish,
+  clearDeletedDish,
 } = menuPageSlice.actions;
 
 export const selectMenuPage = (state) => state.menuPage;

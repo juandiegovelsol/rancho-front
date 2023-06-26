@@ -14,6 +14,7 @@ const Dish = ({
   _id = "",
   handleSubmit = () => {},
   status = true,
+  handleMenuErrase = () => {},
 }) => {
   const [imgPrev, setImgPrev] = useState(image);
 
@@ -67,6 +68,9 @@ const Dish = ({
             Guardar
           </button>
         </form>
+        <button className="dish__button errase" onClick={handleMenuErrase}>
+          Eliminar
+        </button>
       </div>
     );
   }
@@ -100,6 +104,7 @@ Dish.propTypes = {
   _id: PropTypes.string,
   handleSubmit: PropTypes.func,
   status: PropTypes.bool,
+  handleMenuErrase: PropTypes.func,
 };
 
 export default Dish;

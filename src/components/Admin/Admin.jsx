@@ -18,6 +18,9 @@ import {
   uploadImageAsync,
   updateDishAsync,
   createDishAsync,
+  deleteDishAsync,
+  clearCreatedDish,
+  clearDeletedDish,
 } from "../../pages/MenuPage/menuPageSlice";
 import { UserCard } from "../UserCard";
 import { Category } from "../Category";
@@ -28,6 +31,7 @@ import up_arrow from "../../assets/icons/up-arrow.svg";
 import down_arrow from "../../assets/icons/down-arrow.svg";
 import "./admin.scss";
 import { RedirectButton } from "../RedirectButton";
+import { deleteDish } from "../../pages/MenuPage/menuPageAPI";
 
 const Admin = ({ name }) => {
   const { user } = useSelector(selectHome);
@@ -35,7 +39,7 @@ const Admin = ({ name }) => {
   const { lastname, email } = user || "";
   const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
-  const { dishes, updatedDish, imageURL, createdDish } =
+  const { dishes, updatedDish, imageURL, createdDish, deletedDish } =
     useSelector(selectMenuPage);
   const [open, setOpen] = useState(false);
   const [openUsers, setOpenUsers] = useState(false);
@@ -184,6 +188,14 @@ const Admin = ({ name }) => {
     handleAddDish();
   };
 
+  const handleMenuErrase = (index, id) => {
+    handleMenuEdit(index, id);
+    const key = "_id";
+    const value = user._id;
+    dispatch(deleteDishAsync({ key, value, id }));
+    console.log(index, id);
+  };
+
   useEffect(() => {
     if (openUsers) {
       if (Object.keys(allOrders).length === 0) {
@@ -271,8 +283,16 @@ const Admin = ({ name }) => {
   useEffect(() => {
     if (Object.keys(createdDish).length !== 0) {
       dispatch(getDishesAsync());
+      dispatch(clearCreatedDish());
     }
   }, [createdDish]);
+
+  useEffect(() => {
+    if (Object.keys(deletedDish).length !== 0) {
+      dispatch(getDishesAsync());
+      dispatch(clearDeletedDish());
+    }
+  }, [deletedDish]);
 
   return (
     <div className="admin">
@@ -368,6 +388,7 @@ const Admin = ({ name }) => {
                     _id={_id}
                     index={index}
                     handleSubmit={handleSubmit}
+                    handleMenuErrase={() => handleMenuErrase(index, _id)}
                   />
                 )}
                 {!menuEdit[index] && (
