@@ -12,9 +12,10 @@ export const OrderCard = ({
   total,
   status,
   index,
-  orderEdit,
-  handleOrderEdit,
-  setOrderState,
+  orderEdit = false,
+  handleOrderEdit = () => {},
+  setOrderState = () => {},
+  isAdmin = false,
 }) => {
   const { name, lastname, email } = user_id || "";
   const day = new Date(+date);
@@ -46,14 +47,16 @@ export const OrderCard = ({
       {!orderEdit[index] && (
         <>
           <p>{`Estado: ${status}`}</p>
-          <RedirectButton
-            text="Cambiar estado"
-            link=""
-            redirect={() => handleOrderEdit(index)}
-          />
+          {isAdmin && (
+            <RedirectButton
+              text="Cambiar estado"
+              link=""
+              redirect={() => handleOrderEdit(index)}
+            />
+          )}
         </>
       )}
-      {orderEdit[index] && (
+      {orderEdit[index] && isAdmin && (
         <>
           <form>
             <label>Estado:</label>

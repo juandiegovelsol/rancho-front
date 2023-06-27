@@ -27,16 +27,15 @@ import { Category } from "../Category";
 import { UsersCard } from "../UsersCard";
 import { OrderCard } from "../OrderCard";
 import { Dish } from "../Dish";
+import { RedirectButton } from "../RedirectButton";
 import up_arrow from "../../assets/icons/up-arrow.svg";
 import down_arrow from "../../assets/icons/down-arrow.svg";
 import "./admin.scss";
-import { RedirectButton } from "../RedirectButton";
-import { deleteDish } from "../../pages/MenuPage/menuPageAPI";
 
 const Admin = ({ name }) => {
   const { user } = useSelector(selectHome);
   const dispatch = useDispatch();
-  const { lastname, email } = user || "";
+  const { lastname, email, admin } = user || "";
   const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
   const { dishes, updatedDish, imageURL, createdDish, deletedDish } =
@@ -347,24 +346,27 @@ const Admin = ({ name }) => {
         handleCategory={() => handleCategory(openOrders, setOpenOrders)}
         open={openOrders}
       >
-        {allOrders.length &&
-          allOrders.map(
-            ({ _id, user_id, date, order, total, status }, index) => (
-              <OrderCard
-                key={date}
-                _id={_id}
-                user_id={user_id}
-                date={date}
-                order={order}
-                total={total}
-                status={status}
-                index={index}
-                orderEdit={orderEdit}
-                handleOrderEdit={handleOrderEdit}
-                setOrderState={setOrderState}
-              />
-            )
-          )}
+        <div className="admin__orders">
+          {allOrders.length &&
+            allOrders.map(
+              ({ _id, user_id, date, order, total, status }, index) => (
+                <OrderCard
+                  key={date}
+                  _id={_id}
+                  user_id={user_id}
+                  date={date}
+                  order={order}
+                  total={total}
+                  status={status}
+                  index={index}
+                  orderEdit={orderEdit}
+                  handleOrderEdit={handleOrderEdit}
+                  setOrderState={setOrderState}
+                  isAdmin={admin}
+                />
+              )
+            )}
+        </div>
       </Category>
       <Category
         down_arrow={down_arrow}
