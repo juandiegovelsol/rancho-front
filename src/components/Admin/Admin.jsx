@@ -36,7 +36,7 @@ const Admin = ({ name }) => {
   const { user } = useSelector(selectHome);
   const dispatch = useDispatch();
   const { lastname, email, admin } = user || "";
-  const { loading, allUsers, updatedUser, allOrders, updatedOrder } =
+  const { allUsers, updatedUser, allOrders, updatedOrder } =
     useSelector(selectAdmin);
   const { dishes, updatedDish, imageURL, createdDish, deletedDish } =
     useSelector(selectMenuPage);
@@ -112,6 +112,7 @@ const Admin = ({ name }) => {
   };
 
   const handleMenuEdit = (index, _id) => {
+    console.log(_id);
     if (menuEdit[index]) {
       const newState = menuEdit.map((c, i) => {
         if (i === index) {
@@ -197,7 +198,7 @@ const Admin = ({ name }) => {
 
   useEffect(() => {
     if (openUsers) {
-      if (Object.keys(allOrders).length === 0) {
+      if (allUsers.length === 0) {
         const key = "_id";
         const value = user._id;
         dispatch(getAllUsersAsync({ key, value }));
@@ -376,41 +377,39 @@ const Admin = ({ name }) => {
         open={openMenu}
       >
         {dishes.length &&
-          dishes.map(
-            ({ _id, title, image, description, section, price }, index) => (
-              <>
-                {menuEdit[index] && (
-                  <Dish
-                    key={`${title}.`}
-                    title={title}
-                    image={image}
-                    description={description}
-                    price={price}
-                    edit={menuEdit[index]}
-                    _id={_id}
-                    index={index}
-                    handleSubmit={handleSubmit}
-                    handleMenuErrase={() => handleMenuErrase(index, _id)}
+          dishes.map(({ _id, title, image, description, price }, index) => (
+            <div key={`${title}..${_id}`}>
+              {menuEdit[index] && (
+                <Dish
+                  key={`${title}..${_id}`}
+                  title={title}
+                  image={image}
+                  description={description}
+                  price={price}
+                  edit={menuEdit[index]}
+                  _id={_id}
+                  index={index}
+                  handleSubmit={handleSubmit}
+                  handleMenuErrase={() => handleMenuErrase(index, _id)}
+                />
+              )}
+              {!menuEdit[index] && (
+                <Dish
+                  key={`${title}.${_id}`}
+                  title={title}
+                  image={image}
+                  description={description}
+                  price={price}
+                >
+                  <RedirectButton
+                    text="Editar"
+                    link=""
+                    redirect={() => handleMenuEdit(index, _id)}
                   />
-                )}
-                {!menuEdit[index] && (
-                  <Dish
-                    key={`${title}..`}
-                    title={title}
-                    image={image}
-                    description={description}
-                    price={price}
-                  >
-                    <RedirectButton
-                      text="Editar"
-                      link=""
-                      redirect={() => handleMenuEdit(index, _id)}
-                    />
-                  </Dish>
-                )}
-              </>
-            )
-          )}
+                </Dish>
+              )}
+            </div>
+          ))}
 
         {addDishState ? (
           <form className="dish__form" onSubmit={handleSubmitAddDish}>

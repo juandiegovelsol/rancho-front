@@ -17,7 +17,7 @@ export const OrderCard = ({
   setOrderState = () => {},
   isAdmin = false,
 }) => {
-  const { name, lastname, email } = user_id || "";
+  const { name, email } = user_id || "";
   const day = new Date(+date);
   return (
     <span className="order-card" key={_id}>
@@ -92,6 +92,7 @@ OrderCard.propTypes = {
   orderEdit: PropTypes.array,
   handleOrderEdit: PropTypes.func,
   setOrderState: PropTypes.func,
+  isAdmin: PropTypes.bool,
 };
 
 export default OrderCard;

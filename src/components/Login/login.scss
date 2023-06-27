@@ -3,11 +3,14 @@
 
 .login {
   @include flexbox(flex, column, flex-start, center);
-  height: 96vh;
-  max-height: 100vh;
   width: 100%;
-  overflow-y: scroll;
   background-color: $backgroundColor;
   border-bottom: 3px solid $mainColor;
   padding-bottom: 2vh;
+  &__wrapper {
+    @include flexbox(flex, column, flex-start, center);
+    height: auto;
+    max-height: 94vh;
+    overflow-y: scroll;
+  }
 }

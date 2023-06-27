@@ -27,14 +27,16 @@ const Login = () => {
     userLoading,
     loginHandler,
   } = useSelector(selectHome);
-  const { name, lastname, email } = userState || "";
+  const { name, email } = userState || "";
   const { status, admin } = userState || false;
 
   const handleLogin = (link) => {
+    console.log(link);
     loginWithRedirect();
   };
 
   const handleLogout = (link) => {
+    console.log(link);
     const key = "email";
     const status = false;
     const value = email;
@@ -52,7 +54,7 @@ const Login = () => {
   }, [user]);
 
   useEffect(() => {
-    if (loginHandler && user !== undefined) {
+    if (isAuthenticated && loginHandler && user !== undefined) {
       if (Object.keys(userState).length !== 0) {
         const { status: actualStatus } = userState || false; //Probar quitando el || false
         const { email } = userState || "";
@@ -93,6 +95,7 @@ const Login = () => {
       const status = false;
       const value = email;
       dispatch(updateUserAsync({ key, value, status }));
+      dispatch(clearUser());
     }
   }, []);
 
@@ -101,11 +104,11 @@ const Login = () => {
   return (
     <section className="login">
       {status && (
-        <>
+        <div className="login__wrapper">
           {admin && <Admin name={name} />}
           {!admin && <Costumer />}
           <RedirectButton text="Logout" link="" redirect={handleLogout} />
-        </>
+        </div>
       )}
       {!status && (
         <>
