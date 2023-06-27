@@ -5,6 +5,7 @@
   height: auto;
   min-height: 15vh;
   min-width: 80%;
+  max-width: 80%;
   border-top: 3px solid $mainColor;
   border-bottom: 3px solid $mainColor;
   margin: 2vh 0px;
@@ -12,12 +13,20 @@
   @include flexbox(flex, column, space-evenly, center);
   &__order {
     @include flexbox(flex, column, space-evenly, center);
+    max-width: 90%;
     margin: 0;
+    list-style-type: square;
   }
   &__selector {
     border: none;
     border-radius: 5px;
     margin-left: 1vw;
     $backgroundColor: $fourthColor;
+  }
+  &__list-item {
+    text-align: left;
+    &::marker {
+      color: $secondColor;
+    }
   }
 }

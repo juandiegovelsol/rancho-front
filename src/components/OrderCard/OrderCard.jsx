@@ -34,6 +34,7 @@ export const OrderCard = ({
             const total = quantity * price;
             return (
               <li
+                className="order-card__list-item"
                 key={`${id}${quantity}${_id}`}
               >{`${quantity} ${title}, precio $${Math.trunc(total / 1000)}.${
                 total % 1000 ? total % 1000 : "000"

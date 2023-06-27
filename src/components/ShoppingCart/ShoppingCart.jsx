@@ -2,6 +2,11 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  createOrderAsync,
+  openAccount,
+  selectHome,
+} from "../../pages/Home/homeSlice";
 
 import { AddToCart } from "../AddToCart";
 import "./shopping-cart.scss";
@@ -9,9 +14,11 @@ import "./shopping-cart.scss";
 const ShoppingCart = ({ cartlist }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user, createdOrder } = useSelector(selectHome);
   const [hasItems, setHasItems] = useState(false);
-  const [order, setOrder] = useState([]);
+  const [orderprev, setOrder] = useState([]);
   const [orderPrice, setOrderPrice] = useState(0);
+  const [orderData, setOrderData] = useState({});
 
   const handleOrder = (cartlist) => {
     setOrder([]);
@@ -34,14 +41,57 @@ const ShoppingCart = ({ cartlist }) => {
   }, [cartlist]);
 
   useEffect(() => {
-    if (order.length) {
-      console.log("order", order);
+    if (orderprev.length) {
+      console.log("order", orderprev);
       console.log("orderPrice", orderPrice);
       //aqui debera hacer el dispatch para generar la orden y hacer el pago siempre y cuando el usuario este logueado
+      if (Object.keys(user).length === 0) {
+        dispatch(openAccount());
+      } else {
+        const key = "_id";
+        const value = user._id;
+        const order = orderprev.map(({ _id, quantity }) => {
+          return { id: _id, quantity: quantity };
+        });
+        const total = orderPrice;
+        dispatch(createOrderAsync({ key, value, order, total }));
+        /*  console.log("ORDER ARRAY TO BODY", JSON.stringify({ order, total })); */
+      }
+    }
+  }, [orderprev]);
+
+  useEffect(() => {
+    if (Object.keys(createdOrder).length !== 0) {
+      /* const description = `${orderprev.map(({ title, quantity, price }) => {
+          return ` ${quantity} ${title} - $${quantity * price}`;
+        })}.`;
+        setOrderData({
+          name: "Orden El Rancho",
+          description: `${description}`,
+          invoice: "0",
+          currency: "cop",
+          amount: `${orderPrice}`,
+          tax_base: "0",
+          tax: "0",
+          country: "co",
+          lang: "en",
+          external: "false",
+          name_billing: `${user.name} ${user.lastname}`,
+          address_billing: ``,
+          type_doc_billing: "cc",
+          mobilephone_billing: "3050000000",
+          number_doc_billing: "100000000",
+        }); */
       setOrder([]);
       setOrderPrice(0);
     }
-  }, [order]);
+  }, [createdOrder]);
+
+  // eslint-disable-next-line
+  /* const handler = ePayco.checkout.configure({
+    key: `${import.meta.env}`,
+    test: true,
+  }); */
 
   return (
     <section className="cart">

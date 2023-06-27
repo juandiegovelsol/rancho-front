@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createUser, getUser, updateUser } from "./homeAPI";
+import { createOrder, createUser, getUser, updateUser } from "./homeAPI";
 
 const initialState = {
   loading: false,
@@ -15,6 +15,7 @@ const initialState = {
   userLoading: false,
   loginHandler: false,
   logoutHandler: false,
+  createdOrder: {},
 };
 
 export const getUserAsync = createAsyncThunk(
@@ -37,6 +38,14 @@ export const updateUserAsync = createAsyncThunk(
   "home/updateUser",
   async ({ key, value, ...rest }) => {
     const data = await updateUser({ key, value, ...rest });
+    return data;
+  }
+);
+
+export const createOrderAsync = createAsyncThunk(
+  "home/createOrder",
+  async ({ key, value, order, total }) => {
+    const data = await createOrder({ key, value, order, total });
     return data;
   }
 );
@@ -131,6 +140,9 @@ const homeSlice = createSlice({
     clearLoginHandler: (state) => {
       state.loginHandler = false;
     },
+    clearCreatedOrder: (state) => {
+      state.createdOrder = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -156,6 +168,9 @@ const homeSlice = createSlice({
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.userLoading = false;
         state.user = action.payload;
+      })
+      .addCase(createOrderAsync.fulfilled, (state, action) => {
+        state.createdOrder = action.payload;
       });
   },
 });
@@ -177,6 +192,7 @@ export const {
   clearLogoutHandler,
   setLoginHandler,
   clearLoginHandler,
+  clearCreatedOrder,
 } = homeSlice.actions;
 
 export const selectHome = (state) => state.home;

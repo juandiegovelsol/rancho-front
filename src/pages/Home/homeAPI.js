@@ -59,3 +59,23 @@ export const updateUser = async ({ key, value, ...rest }) => {
     console.log(error);
   }
 };
+
+export const createOrder = async ({ key, value, order, total }) => {
+  const url = `${import.meta.env.VITE_API_URL}/order/${key}/${value}`;
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        order,
+        total,
+      }),
+    });
+    const data = response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
