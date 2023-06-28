@@ -19,6 +19,7 @@ const ShoppingCart = ({ cartlist }) => {
   const [orderprev, setOrder] = useState([]);
   const [orderPrice, setOrderPrice] = useState(0);
   const [orderData, setOrderData] = useState({});
+  const epaycoKey = import.meta.env.VITE_EPAYCO_KEY;
 
   const handleOrder = (cartlist) => {
     setOrder([]);
@@ -62,36 +63,42 @@ const ShoppingCart = ({ cartlist }) => {
 
   useEffect(() => {
     if (Object.keys(createdOrder).length !== 0) {
-      /* const description = `${orderprev.map(({ title, quantity, price }) => {
-          return ` ${quantity} ${title} - $${quantity * price}`;
-        })}.`;
-        setOrderData({
-          name: "Orden El Rancho",
-          description: `${description}`,
-          invoice: "0",
-          currency: "cop",
-          amount: `${orderPrice}`,
-          tax_base: "0",
-          tax: "0",
-          country: "co",
-          lang: "en",
-          external: "false",
-          name_billing: `${user.name} ${user.lastname}`,
-          address_billing: ``,
-          type_doc_billing: "cc",
-          mobilephone_billing: "3050000000",
-          number_doc_billing: "100000000",
-        }); */
+      const description = `${orderprev.map(({ title, quantity, price }) => {
+        return ` ${quantity} ${title} - $${quantity * price}`;
+      })}.`;
+      setOrderData({
+        name: "Orden El Rancho",
+        description: `${description}`,
+        invoice: `${createdOrder._id}`,
+        currency: "cop",
+        amount: `${orderPrice}`,
+        tax_base: "0",
+        tax: "0",
+        country: "co",
+        lang: "en",
+        external: "false",
+        name_billing: `${user.name} ${user.lastname}`,
+        address_billing: ``,
+        type_doc_billing: "cc",
+        mobilephone_billing: "3050000000",
+        number_doc_billing: "100000000",
+      });
       setOrder([]);
       setOrderPrice(0);
     }
   }, [createdOrder]);
 
+  useEffect(() => {
+    if (Object.keys(orderData).length !== 0) {
+      handler.open(orderData);
+    }
+  }, [orderData]);
+
   // eslint-disable-next-line
-  /* const handler = ePayco.checkout.configure({
-    key: `${import.meta.env}`,
+  const handler = ePayco.checkout.configure({
+    key: `${epaycoKey}`,
     test: true,
-  }); */
+  });
 
   return (
     <section className="cart">
