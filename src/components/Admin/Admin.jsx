@@ -352,7 +352,7 @@ const Admin = ({ name }) => {
             allOrders.map(
               ({ _id, user_id, date, order, total, status }, index) => (
                 <OrderCard
-                  key={date}
+                  key={_id}
                   _id={_id}
                   user_id={user_id}
                   date={date}
