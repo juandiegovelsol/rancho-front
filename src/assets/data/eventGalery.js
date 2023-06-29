@@ -4,6 +4,14 @@ import events3 from "../images/eventos3.jpeg";
 import events4 from "../images/eventos4.jpeg";
 import events5 from "../images/eventos5.jpeg";
 import events6 from "../images/eventos6.jpeg";
+import image3 from "../images/3.jpg";
+import image4 from "../images/4.jpg";
+import image5 from "../images/5.jpg";
+import image6 from "../images/6.jpg";
+import image19 from "../images/19.jpg";
+import image20 from "../images/20.jpg";
+import birthday from "../images/birthday.jpeg";
+import romantic from "../images/romantic.jpg";
 
 import marriage from "../images/matrimonio.jpg";
 
@@ -25,6 +33,24 @@ export const eventCarrousel = [
   },
   {
     image: events6,
+  },
+];
+
+export const reserveCarrousel = [
+  {
+    image: image20,
+  },
+  {
+    image: image4,
+  },
+  {
+    image: image5,
+  },
+  {
+    image: image19,
+  },
+  {
+    image: image6,
   },
 ];
 
@@ -56,7 +82,7 @@ export const events = [
       "Animación y entretenimiento para niños",
       "Atención excepcional",
     ],
-    image: marriage,
+    image: image3,
   },
   {
     title: "El lugar perfecto para tu próximo evento empresarial",
@@ -87,7 +113,7 @@ export const events = [
       "Atención personalizada",
       "Regalos especiales",
     ],
-    image: marriage,
+    image: birthday,
   },
   {
     title:
@@ -102,6 +128,6 @@ export const events = [
       "Experiencias adicionales",
       "Una noche inolvidable",
     ],
-    image: marriage,
+    image: romantic,
   },
 ];

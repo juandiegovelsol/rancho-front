@@ -140,7 +140,7 @@ const Admin = ({ name }) => {
     const title = e.target.elements[1].value;
     const description = e.target.elements[2].value;
     const price = +e.target.elements[3].value;
-    const status = e.target.elements[4].value ? true : false;
+    const available = e.target.elements[4].value ? true : false;
     const _id = e.target.elements[5].value;
     const index = e.target.elements[6].value;
     handleMenuEdit(+index, _id);
@@ -152,15 +152,15 @@ const Admin = ({ name }) => {
       setTitleState(title);
       setDescriptionState(description);
       setPriceState(price);
-      setStatusState(status);
+      setStatusState(available);
       setIdState(_id);
       dispatch(uploadImageAsync({ formData }));
     } else {
       const key = "_id";
       const value = _id;
-      console.log(file, title, description, price, status);
+      console.log(file, title, description, price, available);
       dispatch(
-        updateDishAsync({ key, value, title, description, price, status })
+        updateDishAsync({ key, value, title, description, price, available })
       );
     }
   };
@@ -262,7 +262,7 @@ const Admin = ({ name }) => {
       const title = titleState;
       const description = descriptionState;
       const price = priceState;
-      const status = statusState;
+      const available = statusState;
       const value = idState;
       const key = "_id";
       dispatch(
@@ -273,7 +273,7 @@ const Admin = ({ name }) => {
           title,
           description,
           price,
-          status,
+          available,
         })
       );
       dispatch(clearImageURL());

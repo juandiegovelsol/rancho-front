@@ -1,23 +1,33 @@
 import menu_entrada_chicharron from "../images/menu-entrada-chicharron.jpg";
 import menu_entrada_mix from "../images/menu-entrada-mix.jpg";
+import image25 from "../images/25.jpg";
+import image26 from "../images/26.jpg";
+import image27 from "../images/27.jpg";
+import image28 from "../images/28.jpg";
+import image29 from "../images/29.jpg";
+import image30 from "../images/30.jpg";
+import image31 from "../images/31.jpg";
 export const menuCarrousel = [
   {
-    image: menu_entrada_chicharron,
+    image: image25,
   },
   {
-    image: menu_entrada_mix,
+    image: image26,
   },
   {
-    image: menu_entrada_chicharron,
+    image: image27,
   },
   {
-    image: menu_entrada_mix,
+    image: image28,
   },
   {
-    image: menu_entrada_chicharron,
+    image: image29,
   },
   {
-    image: menu_entrada_mix,
+    image: image30,
+  },
+  {
+    image: image31,
   },
 ];
 
