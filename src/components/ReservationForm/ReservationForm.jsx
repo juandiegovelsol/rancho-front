@@ -13,7 +13,7 @@ const ReservationForm = () => {
     const people = e.target.elements[i - 3].value;
     const hour = e.target.elements[i - 2].value;
     window.open(
-      `https://wa.me/573113184215?text=Hola%2C%20quisiera%20reservar%20una%20mesa%20para%20${people}%20personas%20a%20las%20${hour}%2C%20el%20dia%20${value.getDate()}%2F${value.getMonth()}`
+      `https://wa.me/573113182415?text=Hola%2C%20quisiera%20reservar%20una%20mesa%20para%20${people}%20personas%20a%20las%20${hour}%2C%20el%20dia%20${value.getDate()}%2F${value.getMonth()}`
     );
   };
 

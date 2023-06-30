@@ -8,6 +8,7 @@ export const getCategories = async () => {
 
 export const getDishes = async () => {
   const url = `${import.meta.env.VITE_API_URL}/menu/`;
+  console.log("URL GET DISHES", url);
   try {
     const response = await fetch(url, {
       method: "GET",
