@@ -244,11 +244,17 @@ const Admin = ({ name }) => {
     if (openMenu) {
       if (!dishes.length) {
         dispatch(getDishesAsync());
-      } else {
+      } /* else {
         setMenuEdit(new Array(dishes.length).fill(false));
-      }
+      } */
     }
   }, [openMenu]);
+
+  useEffect(() => {
+    if (dishes.length) {
+      setMenuEdit(new Array(dishes.length).fill(false));
+    }
+  }, [dishes]);
 
   useEffect(() => {
     if (Object.keys(updatedDish).length !== 0) {
