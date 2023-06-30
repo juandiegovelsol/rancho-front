@@ -19,6 +19,7 @@
     margin: 0;
     color: $textColor;
     flex-grow: 7;
+    font-family: $cursive-font;
   }
   &__menu-button {
     @include flexbox(flex, row, center, center);

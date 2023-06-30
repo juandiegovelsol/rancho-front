@@ -11,7 +11,7 @@ import { Whatsapp } from "../../components/Whatsapp";
 import footer from "../../assets/images/footer.jpg";
 import logo from "../../assets/images/logo.png";
 import { socialMedia } from "../../assets/data/homeGalery";
-import { eventCarrousel } from "../../assets/data/eventGalery";
+import { reserveCarrousel } from "../../assets/data/eventGalery";
 import "./reserve-page.scss";
 
 const ReservePage = () => {
@@ -33,9 +33,7 @@ const ReservePage = () => {
     <main className="reserve-page">
       <NavBar />
       <section onClick={handleCloseMenu} className="menu-page__content">
-        <CarrouselFull carrousel_photos={eventCarrousel}>
-          {" "}
-          {/* cambiar las imagenes, estas son de eventos */}
+        <CarrouselFull carrousel_photos={reserveCarrousel}>
           <ShadedBottomInfo text="De El Rancho, con amor" />
         </CarrouselFull>
 

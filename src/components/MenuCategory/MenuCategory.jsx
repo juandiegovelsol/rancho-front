@@ -30,10 +30,13 @@ const MenuCategory = ({ type, menu_section, dishes, cart }) => {
         <span className="menu-category__content">
           {dishes.length &&
             dishes.map(
-              ({ title, image, description, section, price }, index) => {
+              (
+                { title, image, description, section, price, available },
+                index
+              ) => {
                 const { quantity } = cart[index] || 0;
 
-                if (menu_section === section) {
+                if (menu_section === section && available) {
                   return (
                     <Dish
                       key={title}

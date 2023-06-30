@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.login {
+  @include flexbox(flex, column, flex-start, center);
+  width: 100%;
+  background-color: $backgroundColor;
+  border-bottom: 3px solid $mainColor;
+  padding-bottom: 2vh;
+  &__wrapper {
+    @include flexbox(flex, column, flex-start, center);
+    height: auto;
+    max-height: 94vh;
+    overflow-y: scroll;
+  }
+}

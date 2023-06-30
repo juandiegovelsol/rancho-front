@@ -1,0 +1,17 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.costumer {
+  @include flexbox(flex, column, flex-start, center);
+  height: auto;
+  max-height: 100vh;
+  width: 100%;
+  background-color: $backgroundColor;
+  color: $textColor;
+  &__orders {
+    @include flexbox(flex, column-reverse, flex-start, center);
+    height: auto;
+    width: 100%;
+    background-color: $backgroundColor;
+  }
+}

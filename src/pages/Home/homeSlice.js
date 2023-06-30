@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createOrder, createUser, getUser, updateUser } from "./homeAPI";
 
 const initialState = {
   loading: false,
@@ -10,7 +11,44 @@ const initialState = {
   reserveButtonHandler: false,
   eventButtonHandler: false,
   contactButtonHanlder: false,
+  user: {},
+  userLoading: false,
+  loginHandler: false,
+  logoutHandler: false,
+  createdOrder: {},
 };
+
+export const getUserAsync = createAsyncThunk(
+  "home/getUser",
+  async ({ key, value }) => {
+    const data = await getUser({ key, value });
+    return data;
+  }
+);
+
+export const createUserAsync = createAsyncThunk(
+  "home/createUser",
+  async ({ name, lastname, email, status, admin }) => {
+    const data = await createUser({ name, lastname, email, status, admin });
+    return data;
+  }
+);
+
+export const updateUserAsync = createAsyncThunk(
+  "home/updateUser",
+  async ({ key, value, ...rest }) => {
+    const data = await updateUser({ key, value, ...rest });
+    return data;
+  }
+);
+
+export const createOrderAsync = createAsyncThunk(
+  "home/createOrder",
+  async ({ key, value, order, total }) => {
+    const data = await createOrder({ key, value, order, total });
+    return data;
+  }
+);
 
 const homeSlice = createSlice({
   name: "home",
@@ -87,6 +125,53 @@ const homeSlice = createSlice({
       state.eventButtonHandler = false;
       state.contactButtonHanlder = true;
     },
+    clearUser: (state) => {
+      state.user = {};
+    },
+    setLogoutHandler: (state) => {
+      state.logoutHandler = true;
+    },
+    clearLogoutHandler: (state) => {
+      state.logoutHandler = false;
+    },
+    setLoginHandler: (state) => {
+      state.loginHandler = true;
+    },
+    clearLoginHandler: (state) => {
+      state.loginHandler = false;
+    },
+    clearCreatedOrder: (state) => {
+      state.createdOrder = {};
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getUserAsync.pending, (state) => {
+        state.loading = true;
+        state.userLoading = true;
+      })
+      .addCase(getUserAsync.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(createUserAsync.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(createUserAsync.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(updateUserAsync.pending, (state) => {
+        state.userLoading = true;
+      })
+      .addCase(updateUserAsync.fulfilled, (state, action) => {
+        state.userLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(createOrderAsync.fulfilled, (state, action) => {
+        state.createdOrder = action.payload;
+      });
   },
 });
 
@@ -102,6 +187,12 @@ export const {
   setReserveButton,
   setEventButton,
   setContactButton,
+  clearUser,
+  setLogoutHandler,
+  clearLogoutHandler,
+  setLoginHandler,
+  clearLoginHandler,
+  clearCreatedOrder,
 } = homeSlice.actions;
 
 export const selectHome = (state) => state.home;
