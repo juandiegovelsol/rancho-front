@@ -1,0 +1,46 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+.home-resume {
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: $backgroundColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__image-wrapper {
+    height: 95%;
+    max-width: 50%;
+    margin: 0;
+    flex-grow: 1;
+    @include flexbox(flex, row, center, center);
+  }
+  &__image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    @include flexbox(flex, row, center, center);
+  }
+  &__info {
+    height: 95%;
+    max-width: 50%;
+    flex-grow: 1;
+    @include flexbox(flex, column, space-evenly, center);
+    padding: 0% 3%;
+  }
+  &__text-normal {
+    text-align: left;
+    font-size: 18px;
+    @include flexbox(flex, row, flex-start, center);
+  }
+  &__text-inverted {
+    text-align: right;
+    font-size: 18px;
+    @include flexbox(flex, row, flex-end, center);
+  }
+}
+.normal {
+  flex-direction: row;
+}
+.inverted {
+  flex-direction: row-reverse;
+}

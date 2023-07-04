@@ -1,0 +1,24 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.shaded-bottom-info {
+  position: absolute;
+  bottom: 0;
+  height: 17%;
+  width: 100%;
+  background: $backgroundColor;
+  z-index: 10;
+  background: linear-gradient(
+    0deg,
+    $backgroundColor 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  @include flexbox(flex, row, center, center);
+  &__text {
+    margin-top: 4%;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 500;
+    color: $textColor;
+  }
+}

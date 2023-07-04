@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.menu-button {
+  @include flexbox(flex, row, center, center);
+  width: 100%;
+  min-height: 20%;
+  border: none;
+  background-color: $secondColor;
+  color: $textColor2;
+  font-size: large;
+  font-weight: 500;
+  flex-grow: 1;
+}
+.menu-button-selected {
+  @include flexbox(flex, row, center, center);
+  width: 100%;
+  min-height: 20%;
+  border: none;
+  background-color: $thirdColor;
+  color: $textColor;
+  font-size: large;
+  font-weight: 500;
+  flex-grow: 1;
+}

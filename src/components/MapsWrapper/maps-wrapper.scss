@@ -1,0 +1,24 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.maps-wrapper {
+  padding: 5% 0px;
+  @include flexbox(flex, column, flex-start, center);
+  width: 100%;
+  height: auto;
+  background-color: $backgroundColor;
+  color: $textColor;
+  &__city {
+    font-size: 30px;
+    font-weight: 500;
+  }
+  &__district {
+    font-size: 15px;
+    font-weight: 500;
+  }
+  &__adress {
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 15px;
+  }
+}

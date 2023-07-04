@@ -1,0 +1,45 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.category {
+  @include flexbox(flex, column, flex-start, center);
+  height: auto;
+  min-height: 6vh;
+  width: 100%;
+  background-color: $backgroundColor;
+  color: $textColor;
+  &__handler {
+    min-height: 6vh;
+    width: 100%;
+    background-color: $thirdColor;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+  &__title {
+    min-height: 100%;
+    grid-area: 1 / 4 / 2 / 8;
+    @include flexbox(flex, row, center, center);
+  }
+  &__image {
+    height: 100%;
+    width: 100%;
+    grid-area: 1 / 10 / 2 / 11;
+    @include flexbox(flex, row, flex-start, center);
+    img {
+      height: 80%;
+      width: 80%;
+      object-fit: contain;
+      @include filterGrey();
+    }
+  }
+  &__content {
+    @include flexbox(flex, column, flex-start, center);
+    height: auto;
+    width: 100%;
+
+    background-color: $backgroundColor;
+  }
+}

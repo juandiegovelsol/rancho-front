@@ -1,0 +1,62 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+.nav-bar {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  min-height: 6vh;
+  width: 100%;
+  @include flexbox(flex, column, flex-start, center);
+  &__header {
+    width: 100%;
+    min-height: 6vh;
+    padding: 0px 2% 0px 5%;
+    @include flexbox(flex, row, space-between, center);
+    background-color: $mainColor;
+  }
+
+  &__title {
+    margin: 0;
+    color: $textColor;
+    flex-grow: 7;
+    font-family: $cursive-font;
+  }
+  &__menu-button {
+    @include flexbox(flex, row, center, center);
+    max-height: 100%;
+    height: 100%;
+    max-width: 13%;
+    border: none;
+    background-color: transparent;
+    flex-grow: 1;
+    &:hover,
+    &:focus {
+      cursor: pointer;
+    }
+    p {
+      position: relative;
+      height: 100%;
+      max-width: 10%;
+      min-width: 10%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%);
+      margin-top: 19%;
+      margin-right: 10%;
+      font-size: smaller;
+      @include flexbox(flex, row, center, center);
+    }
+    img {
+      height: 100%;
+      width: 60%;
+      object-fit: contain;
+      @include filterGrey();
+      @include flexbox(flex, row, center, center);
+      /* overflow-clip-margin: none;
+      overflow: visible; */
+    }
+  }
+  &__menu {
+    width: 100%;
+  }
+}

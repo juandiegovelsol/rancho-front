@@ -1,0 +1,8 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
+.menu {
+  @include flexbox(flex, column, flex-start, center);
+  min-height: 30vh;
+  width: 100%;
+}
