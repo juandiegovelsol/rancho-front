@@ -24,7 +24,7 @@
 } */
 .carrousel {
   height: 57vh;
-  background-color: #f5f5dc;
+  background-color: #e0dad5;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -63,5 +63,5 @@
 .carrousel .carousel-control-next,
 .carrousel .carousel-control-prev {
   height: 40vh;
-  color: #f5f5dc;
+  color: #e0dad5;
 }
