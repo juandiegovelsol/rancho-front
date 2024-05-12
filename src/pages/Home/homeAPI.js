@@ -60,7 +60,7 @@ export const updateUser = async ({ key, value, ...rest }) => {
   }
 };
 
-export const createOrder = async ({ key, value, order, total }) => {
+export const createOrder = async ({ key, value, order, total, date }) => {
   const url = `${import.meta.env.VITE_API_URL}/order/${key}/${value}`;
   try {
     const response = await fetch(url, {
@@ -71,6 +71,7 @@ export const createOrder = async ({ key, value, order, total }) => {
       body: JSON.stringify({
         order,
         total,
+        date,
       }),
     });
     const data = response.json();

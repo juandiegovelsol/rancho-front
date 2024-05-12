@@ -62,7 +62,8 @@ const ShoppingCart = ({ cartlist }) => {
           return { id: _id, quantity: quantity };
         });
         const total = orderPrice;
-        dispatch(createOrderAsync({ key, value, order, total }));
+        const date = `${Date.now()}`;
+        dispatch(createOrderAsync({ key, value, order, total, date }));
         /*  console.log("ORDER ARRAY TO BODY", JSON.stringify({ order, total })); */
       }
     }
@@ -139,7 +140,10 @@ const ShoppingCart = ({ cartlist }) => {
               Pagar
             </button>
             <button
-              onClick={() => dispatch(clearCartQuant())}
+              onClick={() => {
+                dispatch(clearCartQuant());
+                console.log("Time: ", Date.now());
+              }}
               className="cart__button"
             >
               Vaciar

@@ -44,8 +44,8 @@ export const updateUserAsync = createAsyncThunk(
 
 export const createOrderAsync = createAsyncThunk(
   "home/createOrder",
-  async ({ key, value, order, total }) => {
-    const data = await createOrder({ key, value, order, total });
+  async ({ key, value, order, total, date }) => {
+    const data = await createOrder({ key, value, order, total, date });
     return data;
   }
 );
