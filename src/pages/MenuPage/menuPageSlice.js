@@ -111,6 +111,7 @@ const menuPageSlice = createSlice({
         return { ...item, quantity: 0 };
       });
       state.cart = updatedCart;
+      state.quantity = 0;
     },
   },
   extraReducers: (builder) => {
