@@ -7,6 +7,7 @@ import {
   openAccount,
   selectHome,
 } from "../../pages/Home/homeSlice";
+import { clearCartQuant } from "../../pages/MenuPage/menuPageSlice";
 
 import { AddToCart } from "../AddToCart";
 import "./shopping-cart.scss";
@@ -20,6 +21,7 @@ const ShoppingCart = ({ cartlist }) => {
   const [orderPrice, setOrderPrice] = useState(0);
   const [orderData, setOrderData] = useState({});
   const epaycoKey = import.meta.env.VITE_EPAYCO_KEY;
+  const [total, setTotal] = useState(0);
 
   const handleOrder = (cartlist) => {
     setOrder([]);
@@ -38,13 +40,18 @@ const ShoppingCart = ({ cartlist }) => {
 
   useEffect(() => {
     const found = cartlist.find((element) => element.quantity > 0);
+    let subtotal = 0;
+    cartlist.forEach(({ price, quantity }) => {
+      quantity ? (subtotal = subtotal + price * quantity) : () => {};
+    });
+    setTotal(subtotal);
     found ? setHasItems(true) : setHasItems(false);
   }, [cartlist]);
 
   useEffect(() => {
     if (orderprev.length) {
-      console.log("order", orderprev);
-      console.log("orderPrice", orderPrice);
+      /* console.log("order", orderprev);
+      console.log("orderPrice", orderPrice); */
       //aqui debera hacer el dispatch para generar la orden y hacer el pago siempre y cuando el usuario este logueado
       if (Object.keys(user).length === 0) {
         dispatch(openAccount());
@@ -85,12 +92,13 @@ const ShoppingCart = ({ cartlist }) => {
       });
       setOrder([]);
       setOrderPrice(0);
+      dispatch(clearCartQuant());
     }
   }, [createdOrder]);
 
   useEffect(() => {
     if (Object.keys(orderData).length !== 0) {
-      handler.open(orderData);
+      //handler.open(orderData); Esto habilita la opcion para pago con epayco
     }
   }, [orderData]);
 
@@ -121,13 +129,22 @@ const ShoppingCart = ({ cartlist }) => {
         })}
 
       <article className="cart__info">
+        <p>Total de la orden: {total}</p>
         {hasItems && (
-          <button
-            onClick={() => handleOrder(cartlist)}
-            className="cart__button"
-          >
-            Pagar
-          </button>
+          <>
+            <button
+              onClick={() => handleOrder(cartlist)}
+              className="cart__button"
+            >
+              Pagar
+            </button>
+            <button
+              onClick={() => dispatch(clearCartQuant())}
+              className="cart__button"
+            >
+              Vaciar
+            </button>
+          </>
         )}
         {!hasItems && (
           <>

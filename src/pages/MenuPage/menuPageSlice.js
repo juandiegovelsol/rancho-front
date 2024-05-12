@@ -106,6 +106,12 @@ const menuPageSlice = createSlice({
     clearDeletedDish: (state) => {
       state.deletedDish = {};
     },
+    clearCartQuant: (state) => {
+      const updatedCart = state.cart.map((item) => {
+        return { ...item, quantity: 0 };
+      });
+      state.cart = updatedCart;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -144,6 +150,7 @@ export const {
   clearImageURL,
   clearCreatedDish,
   clearDeletedDish,
+  clearCartQuant,
 } = menuPageSlice.actions;
 
 export const selectMenuPage = (state) => state.menuPage;
