@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
+  clearCreatedOrder,
   createOrderAsync,
   openAccount,
   selectHome,
@@ -94,6 +95,7 @@ const ShoppingCart = ({ cartlist }) => {
       setOrder([]);
       setOrderPrice(0);
       dispatch(clearCartQuant());
+      dispatch(clearCreatedOrder());
     }
   }, [createdOrder]);
 
