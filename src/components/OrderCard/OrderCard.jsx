@@ -17,13 +17,13 @@ export const OrderCard = ({
   setOrderState = () => {},
   isAdmin = false,
 }) => {
-  const { name, email } = user_id || "";
+  const { name /* email */ } = user_id || "";
   const day = new Date(+date);
   return (
     <span className="order-card" key={`${_id}${name}`}>
       {/* <p>{`Cliente: ${name}`}</p> */}
       <p>{`Cliente: Martin Arroyave`}</p>
-      <p>{`Email: ${email}`}</p>
+      {/* <p>{`Email: ${email}`}</p> */}
       <p>{`Fecha: ${day.getDate()}/${
         day.getMonth() + 1
       }/${day.getFullYear()}`}</p>
