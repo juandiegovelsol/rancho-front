@@ -20,8 +20,9 @@ export const OrderCard = ({
   const { name, email } = user_id || "";
   const day = new Date(+date);
   return (
-    <span className="order-card" key={_id}>
-      <p>{`Cliente: ${name}`}</p>
+    <span className="order-card" key={`${_id}${name}`}>
+      {/* <p>{`Cliente: ${name}`}</p> */}
+      <p>{`Cliente: Martin Arroyave`}</p>
       <p>{`Email: ${email}`}</p>
       <p>{`Fecha: ${day.getDate()}/${
         day.getMonth() + 1
